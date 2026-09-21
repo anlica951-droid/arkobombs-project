@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ARKOBOMBS | Student Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="dashboard-page">
+
+       <nav class="dashboard-nav">
+    <div class="logo">
+        <div class="logo-circle">A</div>
+        <div>
+            <h3>ARKOBOMBS</h3>
+            <span>Academic Readiness Platform</span>
+        </div>
+    </div>
+
+    <div class="dashboard-actions">
+        <a href="index.html" class="home-button">← Home</a>
+        <div class="student-info">IT11B</div>
+    </div>
+</nav>
+
+
+        <main class="student-dashboard">
+
+            <div class="welcome">
+                <span>STUDENT DASHBOARD</span>
+
+                <h1>Stay Ready.<br>Stay Organized.</h1>
+
+                <p>
+                    Keep track of your academic events,
+                    announcements, requirements, and schedule updates.
+                </p>
+            </div>
+
+
+            <section class="next-event">
+
+    <div class="event-label">
+        NEXT ACADEMIC EVENT
+    </div>
+
+    <h2 id="studentSubject">Programming I</h2>
+
+    <h3 id="studentEventType">Laboratory Examination</h3>
+
+    <p class="event-date" id="studentEventDate">
+        September 24 · 1:00 PM
+    </p>
+
+    <p class="event-date" id="studentEventLocation">
+        📍 Computer Laboratory
+    </p>
+
+    <!-- COUNTDOWN -->
+<div class="countdown">
+
+    <div>
+        <strong id="studentDays">05</strong>
+        <span>DAYS</span>
+    </div>
+
+    <div>
+        <strong id="studentHours">12</strong>
+        <span>HOURS</span>
+    </div>
+
+    <div>
+        <strong id="studentMinutes">34</strong>
+        <span>MINUTES</span>
+    </div>
+
+</div>
+
+    <!-- REQUIREMENTS -->
+    <div class="event-section">
+
+        <span>REQUIREMENTS</span>
+
+        <h3>Bring the Following</h3>
+
+        <ul id="studentRequirements">
+            <li>Loading requirements...</li>
+        </ul>
+
+    </div>
+
+    <!-- COVERAGE -->
+    <div class="event-section">
+
+        <span>COVERAGE</span>
+
+        <h3>Topics to Review</h3>
+
+        <ul id="studentCoverage">
+            <li>Loading coverage...</li>
+        </ul>
+
+    </div>
+
+       <a href="event.html" class="dashboard-button">
+        VIEW DETAILS →
+    </a>
+
+
+<section class="next-event">
+
+    <div class="event-label">
+        LATEST ANNOUNCEMENT
+    </div>
+
+    <h2 id="announcementTitle">
+        No announcement yet
+    </h2>
+
+    <p id="announcementContent">
+        Your teacher's published announcements will appear here.
+    </p>
+
+</section>
+
+</main>
+
+</div>
+
+<script>
+    
+
+    const savedAnnouncement = localStorage.getItem("arkobombsAnnouncement");
+
+if (savedAnnouncement) {
+    document.getElementById("announcementTitle").textContent =
+        "New Academic Announcement";
+
+    document.getElementById("announcementContent").textContent =
+        savedAnnouncement;
+}
+const savedSubject = localStorage.getItem("arkobombsSubject");
+
+const savedEventType = localStorage.getItem("arkobombsEventType");
+
+const savedEventDate = localStorage.getItem("arkobombsEventDate");
+
+const savedEventTime = localStorage.getItem("arkobombsEventTime");
+const savedEventLocation =
+    localStorage.getItem("arkobombsEventLocation");
+    const savedRequirements =
+    localStorage.getItem("arkobombsRequirements");
+
+if (savedRequirements) {
+    console.log("Requirements:", savedRequirements);
+}
+
+if (savedSubject) {
+    document.getElementById("studentSubject").textContent =
+        savedSubject;
+}
+
+if (savedEventType) {
+    document.getElementById("studentEventType").textContent =
+        savedEventType;
+}
+
+if (savedEventDate || savedEventTime) {
+    document.getElementById("studentEventDate").textContent =
+        "📅 " +
+        (savedEventDate || "Date not specified") +
+        " · " +
+        (savedEventTime || "Time not specified");
+}
+
+if (savedEventLocation) {
+    document.getElementById("studentEventLocation").textContent =
+        "📍 " + savedEventLocation;
+}
+
+const upcomingEvent = document.getElementById("upcomingEvent");
+
+const savedUpcomingSubject =
+    localStorage.getItem("arkobombsSubject");
+
+const savedUpcomingType =
+    localStorage.getItem("arkobombsEventType");
+
+const savedUpcomingDate =
+    localStorage.getItem("arkobombsEventDate");
+    
+if (savedUpcomingSubject && savedUpcomingType && savedUpcomingDate && upcomingEvent) {
+    upcomingEvent.textContent =
+        savedUpcomingDate + " — " +
+        savedUpcomingSubject + " " +
+        savedUpcomingType;
+}
+const studentRequirementsData =
+    localStorage.getItem("arkobombsRequirements");
+const requirementsList =
+    document.getElementById("studentRequirements");
+
+if (studentRequirementsData && requirementsList) {
+    requirementsList.innerHTML = "";
+
+    const requirements =
+    studentRequirementsData.split(", ");
+
+    requirements.forEach(function(requirement) {
+        const li = document.createElement("li");
+        li.textContent = requirement;
+        requirementsList.appendChild(li);
+    });
+}
+const studentCoverageData =
+    localStorage.getItem("arkobombsCoverage");
+
+const coverageList =
+    document.getElementById("studentCoverage");
+
+if (studentCoverageData && coverageList) {
+    coverageList.innerHTML = "";
+
+    const coverageItems =
+        studentCoverageData.split(", ");
+
+    coverageItems.forEach(function(topic) {
+        const li = document.createElement("li");
+        li.textContent = topic;
+        coverageList.appendChild(li);
+    });
+}
+const studentSavedDate =
+    localStorage.getItem("arkobombsEventDate");
+
+const studentSavedTime =
+    localStorage.getItem("arkobombsEventTime");
+
+if (studentSavedDate && studentSavedTime) {
+
+    const studentEventDate = new Date(
+        `${studentSavedDate}, 2026 ${studentSavedTime}`
+    ).getTime();
+
+    function updateStudentCountdown() {
+
+        const now = new Date().getTime();
+
+        const distance = studentEventDate - now;
+
+        if (distance <= 0) {
+            document.getElementById("studentDays").textContent = "00";
+            document.getElementById("studentHours").textContent = "00";
+            document.getElementById("studentMinutes").textContent = "00";
+            return;
+        }
+
+        const days = Math.floor(
+            distance / (1000 * 60 * 60 * 24)
+        );
+
+        const hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+        );
+
+        const minutes = Math.floor(
+            (distance % (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
+
+        document.getElementById("studentDays").textContent =
+            String(days).padStart(2, "0");
+
+        document.getElementById("studentHours").textContent =
+            String(hours).padStart(2, "0");
+
+        document.getElementById("studentMinutes").textContent =
+            String(minutes).padStart(2, "0");
+    }
+
+    updateStudentCountdown();
+
+        setInterval(updateStudentCountdown, 1000);
+}
+
+</script>
+
+</body>
+</html>

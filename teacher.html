@@ -1,0 +1,395 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ARKOBOMBS | Teacher Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+    <div class="dashboard-page">
+
+        <!-- NAVIGATION -->
+
+        <nav class="dashboard-nav">
+
+            <div class="logo">
+
+                <div class="logo-circle">A</div>
+
+                <div>
+
+                    <h3>ARKOBOMBS</h3>
+
+                    <span>Academic Readiness Platform</span>
+
+                </div>
+
+            </div>
+
+           <div class="dashboard-actions">
+    <a href="index.html" class="home-button">← Home</a>
+    <div class="student-info">TEACHER</div>
+</div>
+        </nav>
+
+
+        <!-- TEACHER DASHBOARD -->
+
+        <main class="student-dashboard">
+
+            <div class="welcome">
+
+                <span>TEACHER DASHBOARD</span>
+
+                <h1>Manage Academic Events.</h1>
+
+                <p>
+                    Create announcements, organize academic information,
+                    and keep students updated.
+                </p>
+
+            </div>
+
+
+            <!-- CREATE ANNOUNCEMENT -->
+
+            <section class="next-event">
+
+                <div class="event-label">
+                    CREATE ANNOUNCEMENT
+                </div>
+
+                <h2>New Academic Announcement</h2>
+
+                <p class="event-date">
+                    Turn an announcement into an organized academic event.
+                </p>
+
+
+                <textarea
+    id="announcementText"
+    class="announcement-input"
+    placeholder="Paste or type your academic announcement here..."
+></textarea>
+
+<input
+    type="text"
+    id="coverageInput"
+    class="announcement-input"
+    placeholder="Enter coverage (e.g. Variables, Functions, Arrays)"
+><input
+    type="text"
+    id="requirementsInput"
+    class="announcement-input"
+    placeholder="Enter requirements (e.g. Student ID, Laptop, Pen)"
+>
+
+<input
+    type="text"
+    id="locationInput"
+    class="announcement-input"
+    placeholder="Enter location (e.g. Computer Laboratory)"
+>
+
+
+                <button id="organizeButton" class="dashboard-button">
+    ORGANIZE ANNOUNCEMENT →
+</button>
+
+            </section>
+
+
+           <!-- UPCOMING EVENTS -->
+
+<section class="dashboard-grid">
+
+    <div class="dashboard-box">
+
+        <span>UPCOMING EVENTS</span>
+
+        <h3 id="teacherUpcomingSubject">
+            No upcoming event
+        </h3>
+
+        <p id="teacherUpcomingType">
+            Create an announcement to add an event.
+        </p>
+
+        <p id="teacherUpcomingDate">
+        </p>
+       
+<button id="rescheduleButton" class="dashboard-button">
+    RESCHEDULE EVENT
+</button>
+
+    </div>
+
+
+    <div class="dashboard-box">
+
+        <span>RECENT ANNOUNCEMENTS</span>
+
+        <h3 id="teacherRecentTitle">
+            No recent announcement
+        </h3>
+
+        <p id="teacherRecentContent">
+            Published announcements will appear here.
+        </p>
+
+        <div class="updated">
+            🔄 UPDATED
+        </div>
+
+    </div>
+
+</section>
+        </main>
+
+    </div>
+
+<script>
+
+    const organizeButton = document.getElementById("organizeButton");
+
+    const announcementText = document.getElementById("announcementText");
+
+
+    organizeButton.addEventListener("click", function() {
+
+        const announcement = announcementText.value.trim();
+
+
+        if (announcement === "") {
+
+            alert("Please enter an academic announcement first.");
+
+            return;
+
+        }
+         const dateMatch = announcement.match(/September \d{1,2}/i);
+
+const eventDate = dateMatch ? dateMatch[0] : "Date not specified";
+
+const timeMatch = announcement.match(/\b\d{1,2}:\d{2}\s*(AM|PM)\b/i);
+
+const eventTime = timeMatch ? timeMatch[0] : "Time not specified";
+
+const subjectMatch = announcement.match(
+    /^(.*?)\s+(?:Presentation|Quiz|Exam|Examination|Assignment)\b/i
+);
+
+const subject = subjectMatch
+    ? subjectMatch[1].trim()
+    : announcement.split(" ")[0];
+
+let eventType = "Academic Event";
+
+const lowerAnnouncement = announcement.toLowerCase();
+
+if (lowerAnnouncement.includes("quiz")) {
+    eventType = "Quiz";
+} else if (lowerAnnouncement.includes("examination")) {
+    eventType = "Examination";
+} else if (lowerAnnouncement.includes("exam")) {
+    eventType = "Examination";
+} else if (lowerAnnouncement.includes("presentation")) {
+    eventType = "Presentation";
+} else if (lowerAnnouncement.includes("assignment")) {
+    eventType = "Assignment";
+}
+
+        const preview = document.createElement("div");
+preview.className = "announcement-preview";
+const coverage =
+    document.getElementById("coverageInput").value;
+
+const requirements =
+    document.getElementById("requirementsInput").value;
+
+const location =
+    document.getElementById("locationInput").value;
+const coverageItems = coverage
+    .split(",")
+    .map(item => item.trim())
+    .filter(item => item !== "");
+
+const coverageHTML = coverageItems
+    .map(item => `<li>${item}</li>`)
+    .join("");
+    const requirementsItems = requirements
+    .split(",")
+    .map(item => item.trim())
+    .filter(item => item !== "");
+
+const requirementsHTML = requirementsItems
+    .map(item => `<li>${item}</li>`)
+    .join("");
+
+preview.innerHTML = `
+    <span>ORGANIZED ANNOUNCEMENT</span>
+
+    <h2 id="previewSubject">${subject}</h2>
+
+   <h3 id="previewEvent">${eventType}</h3>
+
+   <p id="previewDate">📅 ${eventDate}</p>
+
+   <p id="previewLocation">📍 ${location}</p>
+    <h4>COVERAGE</h4>
+
+<ul id="previewCoverage">
+    ${coverageHTML}
+</ul>
+<h4>REQUIREMENTS</h4>
+
+<ul id="previewRequirements">
+    ${requirementsHTML}
+</ul>
+    <button id="publishButton" class="dashboard-button">
+        CONFIRM & PUBLISH
+    </button>
+`;
+
+document.querySelector(".next-event").appendChild(preview);
+document.getElementById("publishButton").addEventListener("click", function() {
+   localStorage.setItem("arkobombsAnnouncement", announcementText.value);
+localStorage.setItem("arkobombsEventType", eventType);
+localStorage.setItem("arkobombsSubject", subject);
+localStorage.setItem("arkobombsEventDate", eventDate);
+localStorage.setItem("arkobombsEventTime", eventTime);
+localStorage.setItem("arkobombsEventLocation", location);
+localStorage.setItem(
+    "arkobombsCoverage",
+    coverage    
+);
+localStorage.setItem("arkobombsRequirements", requirements);
+
+
+    alert("Announcement published successfully!");
+});
+
+
+    });
+const teacherSubject =
+    localStorage.getItem("arkobombsSubject");
+
+const teacherEventType =
+    localStorage.getItem("arkobombsEventType");
+
+const teacherEventDate =
+    localStorage.getItem("arkobombsEventDate");
+
+const teacherEventTime =
+    localStorage.getItem("arkobombsEventTime");
+
+const teacherAnnouncement =
+    localStorage.getItem("arkobombsAnnouncement");
+
+
+if (teacherSubject) {
+    document.getElementById("teacherUpcomingSubject").textContent =
+        teacherSubject;
+}
+
+if (teacherEventType) {
+    document.getElementById("teacherUpcomingType").textContent =
+        teacherEventType;
+}
+
+if (teacherEventDate || teacherEventTime) {
+    document.getElementById("teacherUpcomingDate").textContent =
+        (teacherEventDate || "Date not specified") +
+        " · " +
+        (teacherEventTime || "Time not specified");
+}
+
+if (teacherAnnouncement) {
+    document.getElementById("teacherRecentTitle").textContent =
+        teacherSubject || "New Announcement";
+
+    document.getElementById("teacherRecentContent").textContent =
+        teacherAnnouncement;
+}
+const rescheduleButton =
+    document.getElementById("rescheduleButton");
+
+if (rescheduleButton) {
+
+    rescheduleButton.addEventListener("click", function() {
+
+
+        const newDate = prompt(
+            "Enter the new event date (example: September 30):"
+        );
+
+        if (!newDate) {
+            return;
+        }
+        const formattedDate = newDate.replace(
+    /^(September)(\d)/i,
+    "$1 $2"
+);
+
+        const newTime = prompt(
+            "Enter the new event time (example: 2:00 PM):"
+        );
+
+        if (!newTime) {
+            return;
+        }
+
+        localStorage.setItem(
+    "arkobombsEventDate",
+    formattedDate
+);
+
+        localStorage.setItem(
+    "arkobombsEventTime",
+    newTime
+);
+const updatedAnnouncement =
+    teacherSubject +
+    " " +
+    teacherEventType +
+    " has been rescheduled to " +
+    formattedDate +
+    " at " +
+    newTime +
+    ".";
+
+localStorage.setItem(
+    "arkobombsAnnouncement",
+    updatedAnnouncement
+);
+
+document.getElementById("teacherUpcomingDate").textContent =
+    formattedDate + " · " + newTime;
+alert("Event schedule updated successfully!");
+
+        location.reload();
+
+    });
+
+}
+</script>
+
+</body>
+
+</html>
+```

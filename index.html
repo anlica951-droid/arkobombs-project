@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ARKOBOMBS | Academic Readiness Platform</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background:
+                radial-gradient(circle at 10% 20%, #f4b8d8 0%, transparent 35%),
+                radial-gradient(circle at 90% 10%, #d9b7f4 0%, transparent 35%),
+                linear-gradient(135deg, #f9dff0, #eee8fa 45%, #dcecff);
+            min-height: 100vh;
+            color: #33216e;
+            padding: 30px;
+        }
+
+        /* MAIN CONTAINER */
+
+        .page {
+            min-height: calc(100vh - 60px);
+            border-radius: 30px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.30);
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            box-shadow: 0 25px 70px rgba(92, 58, 135, 0.15);
+            backdrop-filter: blur(18px);
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            height: 85px;
+            margin: 22px 30px 0;
+            padding: 0 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-radius: 22px;
+
+            background: rgba(255, 255, 255, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.75);
+
+            box-shadow: 0 12px 35px rgba(91, 54, 130, 0.10);
+
+            backdrop-filter: blur(20px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+
+            background: linear-gradient(135deg, #8b4de8, #5926c8);
+
+            box-shadow: 0 8px 20px rgba(103, 55, 210, 0.25);
+        }
+
+        .logo-text {
+            line-height: 1.1;
+        }
+
+        .logo-text h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 22px;
+            color: #5121ad;
+        }
+
+        .logo-text span {
+            font-size: 11px;
+            color: #765aa9;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #442b82;
+            font-size: 13px;
+            font-weight: 600;
+
+            padding: 10px 21px;
+
+            border: 1px solid #7952bb;
+            border-radius: 30px;
+
+            transition: 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            background: #6333c9;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: calc(100vh - 167px);
+
+            display: grid;
+            grid-template-columns: 46% 54%;
+
+            align-items: center;
+
+            padding: 55px 65px 70px;
+            gap: 30px;
+        }
+
+        .hero-content {
+            padding-left: 15px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            background: rgba(255,255,255,0.82);
+            padding: 10px 17px;
+
+            border-radius: 30px;
+
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+
+            color: #6734ca;
+
+            box-shadow: 0 8px 20px rgba(94, 49, 140, 0.08);
+        }
+
+        .badge::before {
+            content: "✦";
+            color: #6734ca;
+        }
+
+        .hero h1 {
+            font-family: "Playfair Display", serif;
+
+            font-size: clamp(65px, 7vw, 105px);
+            line-height: 0.92;
+
+            margin-top: 30px;
+
+            color: #5222ad;
+
+            letter-spacing: -3px;
+        }
+
+        .subtitle {
+            margin-top: 22px;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 27px;
+            line-height: 1.25;
+
+            color: #6539ba;
+        }
+
+        .tagline {
+            margin-top: 22px;
+
+            font-size: 21px;
+            font-weight: 700;
+
+            color: #2d2254;
+        }
+
+        .description {
+            max-width: 570px;
+
+            margin-top: 18px;
+
+            font-size: 15px;
+            line-height: 1.8;
+
+            color: #66558b;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            text-decoration: none;
+
+            padding: 15px 26px;
+
+            border-radius: 15px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: 0.25s ease;
+        }
+
+        .btn-primary {
+            color: white;
+
+            background: linear-gradient(
+                135deg,
+                #a35af2,
+                #6425d4
+            );
+
+            box-shadow: 0 12px 25px rgba(100, 38, 207, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 30px rgba(100, 38, 207, 0.35);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.8);
+            color: #7141c5;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+
+        /* PRODUCT MOCKUP */
+
+        .visual {
+            position: relative;
+
+            height: 570px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .glow {
+            position: absolute;
+
+            width: 520px;
+            height: 520px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(166, 103, 237, 0.40),
+                    rgba(210, 175, 244, 0.15),
+                    transparent 70%
+                );
+
+            filter: blur(10px);
+        }
+
+        /* LAPTOP */
+
+        .laptop {
+            position: relative;
+            width: 620px;
+            z-index: 2;
+
+            transform: perspective(1100px) rotateY(-5deg) rotateX(2deg);
+            filter: drop-shadow(0 35px 35px rgba(75, 45, 105, 0.25));
+        }
+
+        .screen-frame {
+            width: 100%;
+            height: 365px;
+
+            padding: 13px;
+
+            border-radius: 28px 28px 12px 12px;
+
+            background: linear-gradient(
+                145deg,
+                #ffffff,
+                #d9c9e4
+            );
+
+            box-shadow:
+                inset 0 0 0 2px rgba(255,255,255,0.8),
+                0 5px 10px rgba(67, 37, 90, 0.15);
+        }
+
+        .screen {
+            width: 100%;
+            height: 100%;
+
+            border-radius: 17px;
+
+            overflow: hidden;
+
+            background: #f8f5fc;
+        }
+
+        .screen-nav {
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 20px;
+
+            background: rgba(255,255,255,0.92);
+
+            border-bottom: 1px solid #eee8f5;
+        }
+
+        .mini-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: #5827bb;
+
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .mini-logo-circle {
+            width: 25px;
+            height: 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            color: white;
+
+            background: #7136d3;
+
+            font-size: 10px;
+        }
+
+        .mini-links {
+            display: flex;
+            gap: 18px;
+
+            font-size: 8px;
+            color: #7d6b9e;
+        }
+
+        .screen-content {
+            padding: 24px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+        }
+
+        .screen-left h2 {
+            font-family: "Playfair Display", serif;
+
+            font-size: 28px;
+            line-height: 1.05;
+
+            color: #4d24a6;
+        }
+
+        .screen-left p {
+            margin-top: 10px;
+
+            font-size: 9px;
+            line-height: 1.6;
+
+            color: #77678f;
+        }
+
+        .screen-button {
+            display: inline-block;
+
+            margin-top: 16px;
+
+            padding: 7px 14px;
+
+            border-radius: 7px;
+
+            background: #6330c6;
+            color: white;
+
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .event-card {
+            padding: 17px;
+
+            border-radius: 16px;
+
+            background: linear-gradient(
+                145deg,
+                #f2eafa,
+                #dfd1f4
+            );
+
+            border: 1px solid #e5d9f2;
+        }
+
+        .event-card small {
+            font-size: 7px;
+            color: #7c5ba8;
+            letter-spacing: 1px;
+        }
+
+        .event-card h3 {
+            margin-top: 9px;
+
+            font-size: 18px;
+            line-height: 1.1;
+
+            color: #5430a5;
+        }
+
+        .event-date {
+            margin-top: 10px;
+
+            font-size: 8px;
+            color: #7356a2;
+        }
+
+        .stats {
+            display: flex;
+            gap: 7px;
+
+            margin-top: 16px;
+        }
+
+        .stat {
+            flex: 1;
+
+            text-align: center;
+
+            padding: 10px 4px;
+
+            border-radius: 9px;
+
+            background: rgba(255,255,255,0.65);
+        }
+
+        .stat strong {
+            display: block;
+
+            font-size: 17px;
+
+            color: #7136d5;
+        }
+
+        .stat span {
+            font-size: 6px;
+            color: #76688f;
+        }
+
+        .update {
+            margin-top: 12px;
+
+            padding: 9px;
+
+            border-radius: 9px;
+
+            background: linear-gradient(
+                135deg,
+                #7651e6,
+                #5c3bd1
+            );
+
+            color: white;
+
+            font-size: 7px;
+        }
+
+        /* LAPTOP BASE */
+
+        .base {
+            width: 112%;
+            height: 28px;
+
+            margin-left: -6%;
+
+            margin-top: -1px;
+
+            border-radius: 0 0 35px 35px;
+
+            background: linear-gradient(
+                180deg,
+                #e7dce9,
+                #c8b6cd
+            );
+
+            box-shadow:
+                0 18px 25px rgba(63, 39, 75, 0.25);
+        }
+
+        .notch {
+            width: 100px;
+            height: 6px;
+
+            margin: auto;
+
+            border-radius: 0 0 10px 10px;
+
+            background: #bca9c3;
+        }
+
+        /* FLOATING CARDS */
+
+        .floating-card {
+            position: absolute;
+
+            z-index: 4;
+
+            padding: 14px 17px;
+
+            border-radius: 15px;
+
+            background: rgba(255,255,255,0.78);
+
+            border: 1px solid rgba(255,255,255,0.85);
+
+            box-shadow: 0 15px 35px rgba(75,45,110,0.15);
+
+            backdrop-filter: blur(15px);
+
+            font-size: 11px;
+            font-weight: 700;
+
+            color: #59329e;
+        }
+
+        .card-one {
+            top: 70px;
+            right: 30px;
+            transform: rotate(5deg);
+        }
+
+        .card-two {
+            bottom: 75px;
+            left: 5px;
+            transform: rotate(-5deg);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1100px) {
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content {
+                padding-left: 0;
+            }
+
+            .description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+
+            .visual {
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 12px;
+            }
+
+            nav {
+                margin: 12px;
+                padding: 0 18px;
+            }
+
+            .nav-links a {
+                padding: 8px 11px;
+                font-size: 10px;
+            }
+
+            .nav-links a:nth-child(2),
+            .nav-links a:nth-child(3) {
+                display: none;
+            }
+
+            .hero {
+                padding: 45px 25px;
+            }
+
+            .hero h1 {
+                font-size: 58px;
+            }
+
+            .subtitle {
+                font-size: 21px;
+            }
+
+            .visual {
+                height: 400px;
+            }
+
+            .laptop {
+                width: 440px;
+            }
+
+            .screen-frame {
+                height: 270px;
+            }
+
+            .floating-card {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- NAVIGATION -->
+    <nav>
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                A
+            </div>
+
+            <div class="logo-text">
+                <h3>ARKOBOMBS</h3>
+                <span>Academic Readiness Platform</span>
+            </div>
+
+        </div>
+
+        <div class="nav-links">
+    <a href="#">About</a>
+    <a href="#">Features</a>
+    <a href="student.html">Student Portal</a>
+    <a href="teacher.html">Teacher Portal</a>
+</div>
+
+    </nav>
+
+
+    <!-- HERO SECTION -->
+    <main class="hero">
+
+        <section class="hero-content">
+
+            <div class="badge">
+                CODEFEST 2026 STARTUP MVP
+            </div>
+
+            <h1>
+                ARKOBOMBS
+            </h1>
+
+            <div class="subtitle">
+                Academic Announcement<br>
+                & Readiness Platform
+            </div>
+
+            <div class="tagline">
+                From Announcement to Action.
+            </div>
+
+            <p class="description">
+                ARKOBOMBS transforms scattered academic announcements
+                into organized academic events with countdowns,
+                requirements, exam coverage, and synchronized
+                schedule updates.
+            </p>
+
+            <div class="buttons">
+
+                <a href="student.html" class="btn btn-primary">
+                    View Prototype →
+                </a>
+
+                <a href="#" class="btn btn-secondary">
+                    Learn More
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- VISUAL -->
+        <section class="visual">
+
+            <div class="glow"></div>
+
+            <div class="floating-card card-one">
+                📅 Schedule Updated
+            </div>
+
+            <div class="floating-card card-two">
+                ✓ Academic Ready
+            </div>
+
+
+            <div class="laptop">
+
+                <div class="screen-frame">
+
+                    <div class="screen">
+
+                        <!-- MINI WEBSITE NAV -->
+                        <div class="screen-nav">
+
+                            <div class="mini-logo">
+
+                                <div class="mini-logo-circle">
+                                    A
+                                </div>
+
+                                ARKOBOMBS
+
+                            </div>
+
+                            <div class="mini-links">
+                                <span>Announcements</span>
+                                <span>Schedule</span>
+                                <span>Exams</span>
+                            </div>
+
+                        </div>
+
+
+                        <!-- SCREEN CONTENT -->
+                        <div class="screen-content">
+
+                            <div class="screen-left">
+
+                                <h2>
+                                    Stay Ready.<br>
+                                    Stay Organized.
+                                </h2>
+
+                                <p>
+                                    Track academic announcements,
+                                    upcoming exams, requirements,
+                                    and important school events
+                                    in one organized platform.
+                                </p>
+
+                                <div class="screen-button">
+                                    Open Dashboard →
+                                </div>
+
+                            </div>
+
+
+                            <div class="event-card">
+
+                                <small>
+                                    NEXT ACADEMIC EVENT
+                                </small>
+
+                                <h3>
+                                    Programming I
+                                    Laboratory Exam
+                                </h3>
+
+                                <div class="event-date">
+                                    September 24 · Computer Laboratory
+                                </div>
+
+                                <div class="stats">
+
+                                    <div class="stat">
+                                        <strong>05</strong>
+                                        <span>Days</span>
+                                    </div>
+
+                                    <div class="stat">
+                                        <strong>12</strong>
+                                        <span>Hours</span>
+                                    </div>
+
+                                    <div class="stat">
+                                        <strong>34</strong>
+                                        <span>Minutes</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="update">
+                                    🔄 Schedule Updated
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="base">
+                    <div class="notch"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>                

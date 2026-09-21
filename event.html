@@ -1,0 +1,271 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ARKOBOMBS | Event Details</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+    <div class="dashboard-page">
+
+        <!-- NAVIGATION -->
+
+        <nav class="dashboard-nav">
+
+            <div class="logo">
+
+                <div class="logo-circle">A</div>
+
+                <div>
+
+                    <h3>ARKOBOMBS</h3>
+
+                    <span>Academic Readiness Platform</span>
+
+                </div>
+
+            </div>
+
+            <div class="student-info">
+                IT11B
+            </div>
+
+        </nav>
+
+
+        <!-- EVENT DETAILS -->
+
+        <main class="student-dashboard">
+
+            <div class="welcome">
+
+                <span>ACADEMIC EVENT</span>
+
+                <h1 id="eventSubject">Programming I</h1>
+
+                <p id="eventType">
+    Laboratory Examination
+</p>
+
+            </div>
+
+
+            <section class="next-event">
+
+                <div class="event-label">
+                    EVENT DETAILS
+                </div>
+
+                <h2 id="eventTypeDetails">Laboratory Examination</h2>
+
+                <p class="event-date" id="eventDate">
+    September 24 · 1:00 PM
+</p>
+
+                <p class="event-date" id="eventLocation">
+    📍 Computer Laboratory
+</p>
+
+
+                <!-- COUNTDOWN -->
+
+                <div class="countdown">
+
+                    <div>
+                        <strong>05</strong>
+                        <span>DAYS</span>
+                    </div>
+
+                    <div>
+                        <strong>12</strong>
+                        <span>HOURS</span>
+                    </div>
+
+                    <div>
+                        <strong>34</strong>
+                        <span>MINUTES</span>
+                    </div>
+
+                </div>
+
+
+                <!-- COVERAGE -->
+
+                <div class="dashboard-box" style="margin-top:24px;">
+
+                    <span>COVERAGE</span>
+
+                    <h3>Topics to Review</h3>
+
+<ul id="eventCoverage">
+
+    <li>Java Variables</li>
+    <li>Data Types</li>
+    <li>Conditional Statements</li>
+    <li>Loops</li>
+    <li>Basic Programming Logic</li>
+
+</ul>
+                </div>
+             
+
+
+
+
+                <!-- REQUIREMENTS -->
+
+                <div class="dashboard-box" style="margin-top:25px;">
+
+                    <span>REQUIREMENTS</span>
+
+                    <h3>Bring the Following</h3>
+
+                    <ul id="eventRequirements">
+
+    <li>Student ID</li>
+    <li>Notebook</li>
+    <li>Pen</li>
+    <li>Computer Laboratory Account</li>
+
+</ul>
+
+                </div>
+
+
+                <a href="student.html" class="dashboard-button">
+    ← BACK TO DASHBOARD
+</a>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script>
+    const savedDate = localStorage.getItem("arkobombsEventDate");
+const savedTime = localStorage.getItem("arkobombsEventTime");
+
+const eventDate = new Date(
+    `${savedDate}, 2026 ${savedTime}`
+).getTime();
+
+function updateCountdown() {
+
+    const now = new Date().getTime();
+
+    const difference = eventDate - now;
+
+    if (difference <= 0) {
+        document.querySelector(".countdown").innerHTML =
+            "<strong>EVENT STARTED</strong>";
+        return;
+    }
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+
+        const hours = Math.floor(
+            (difference / (1000 * 60 * 60)) % 24
+        );
+
+        const minutes = Math.floor(
+            (difference / (1000 * 60)) % 60
+        );
+
+        const countdown = document.querySelectorAll(".countdown strong");
+
+        countdown[0].textContent = String(days).padStart(2, "0");
+        countdown[1].textContent = String(hours).padStart(2, "0");
+        countdown[2].textContent = String(minutes).padStart(2, "0");
+    }
+
+    updateCountdown();
+
+    setInterval(updateCountdown, 1000);
+
+    const savedSubject = localStorage.getItem("arkobombsSubject");
+
+if (savedSubject) {
+    document.getElementById("eventSubject").textContent =
+        savedSubject;
+}
+const savedEventType = localStorage.getItem("arkobombsEventType");
+const savedEventDate = localStorage.getItem("arkobombsEventDate");
+const savedEventTime = localStorage.getItem("arkobombsEventTime");
+const savedEventLocation =
+    localStorage.getItem("arkobombsEventLocation");
+
+if (savedEventDate || savedEventTime) {
+    document.getElementById("eventDate").textContent =
+        (savedEventDate || "Date not specified") +
+        " · " +
+        (savedEventTime || "Time not specified");
+}
+
+if (savedEventType) {
+    document.getElementById("eventType").textContent =
+        savedEventType;
+
+    document.getElementById("eventTypeDetails").textContent =
+        savedEventType;
+}
+
+if (savedEventLocation) {
+    document.getElementById("eventLocation").textContent =
+        "📍 " + savedEventLocation;
+}
+const savedCoverage = localStorage.getItem("arkobombsCoverage");
+
+if (savedCoverage) {
+    const coverageList = document.getElementById("eventCoverage");
+
+    coverageList.innerHTML = "";
+
+    const topics = savedCoverage.split(", ");
+
+    topics.forEach(function(topic) {
+        const li = document.createElement("li");
+        li.textContent = topic;
+        coverageList.appendChild(li);
+    });
+}
+const savedRequirements =
+    localStorage.getItem("arkobombsRequirements");
+
+if (savedRequirements) {
+    const requirementsList =
+        document.getElementById("eventRequirements");
+
+    requirementsList.innerHTML = "";
+
+    const requirements =
+        savedRequirements.split(", ");
+
+    requirements.forEach(function(requirement) {
+        const li = document.createElement("li");
+        li.textContent = requirement;
+        requirementsList.appendChild(li);
+    });
+}
+
+</script>
+
+
+</body>
+
+</html>
+```
