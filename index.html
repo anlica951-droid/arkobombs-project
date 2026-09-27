@@ -656,7 +656,103 @@
                 display: none;
             }
         }
+/* ===== NEW HOMEPAGE SECTIONS ===== */
 
+.info-section{
+    padding:90px 70px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-title h2{
+    font-family:"Playfair Display",serif;
+    font-size:46px;
+    color:#5222AD;
+}
+
+.section-title p{
+    margin-top:12px;
+    color:#6B6487;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:22px;
+}
+
+.info-card{
+    background:rgba(255,255,255,.72);
+    backdrop-filter:blur(16px);
+    padding:24px;
+    border-radius:22px;
+    box-shadow:0 15px 30px rgba(91,54,130,.08);
+    transition:.25s;
+}
+
+.info-card:hover{
+    transform:translateY(-6px);
+}
+
+.info-card h3{
+    color:#6030C6;
+    margin-bottom:10px;
+}
+
+.info-card p{
+    color:#6B6487;
+    line-height:1.7;
+}
+
+.demo-flow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:22px;
+}
+
+.flow-card{
+    background:white;
+    padding:24px;
+    border-radius:22px;
+    box-shadow:0 15px 30px rgba(91,54,130,.08);
+}
+
+.flow-card h3{
+    color:#6030C6;
+    margin-bottom:12px;
+}
+
+.roadmap{
+    display:grid;
+    gap:18px;
+}
+
+.roadmap-card{
+    background:white;
+    padding:22px;
+    border-left:6px solid #8B4DE8;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(91,54,130,.08);
+}
+
+.roadmap-card h3{
+    color:#6030C6;
+    margin-bottom:6px;
+}
+
+.footer{
+    padding:70px 20px;
+    text-align:center;
+}
+
+.footer h2{
+    font-family:"Playfair Display",serif;
+    color:#5222AD;
+    margin-bottom:10px;
+}
     </style>
 </head>
 
@@ -681,10 +777,10 @@
         </div>
 
         <div class="nav-links">
-    <a href="#">About</a>
-    <a href="#">Features</a>
-    <a href="student.html">Student Portal</a>
-    <a href="teacher.html">Teacher Portal</a>
+    <a href="#problem">About</a>
+    <a href="#features">Features</a>
+    <a href="#demo">Demo</a>
+    <a href="#roadmap">Roadmap</a>
 </div>
 
     </nav>
@@ -721,14 +817,13 @@
 
             <div class="buttons">
 
-                <a href="student.html" class="btn btn-primary">
-                    View Prototype →
-                </a>
+                <a href="login.html" class="btn btn-primary">
+    Log In →
+</a>
 
-                <a href="#" class="btn btn-secondary">
-                    Learn More
-                </a>
-
+                <a href="#problem" class="btn btn-secondary">
+    Learn More
+</a>
             </div>
 
         </section>
@@ -856,7 +951,139 @@
 
     </main>
 
-</div>
+<!-- ================= PROBLEM ================= -->
 
+<section id="problem" class="info-section">
+  <div class="section-title">
+    <h2>The Problem</h2>
+    <p>Academic announcements are scattered across different platforms.</p>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>📢 Scattered Announcements</h3>
+      <p>Students receive updates from Messenger, LMS, and classroom group chats.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>⏰ Missed Deadlines</h3>
+      <p>Important quizzes, exams, and presentations are easily forgotten.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>📚 No Central Organizer</h3>
+      <p>Students manually organize schedules, reminders, and requirements.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURES ================= -->
+
+<section id="features" class="info-section">
+  <div class="section-title">
+    <h2>ARKOBOMBS Features</h2>
+    <p>Everything students need in one organized platform.</p>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>📅 Smart Calendar</h3>
+      <p>View quizzes, exams, deadlines, and events in one calendar.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>🔔 Notification Center</h3>
+      <p>Receive announcements instantly from teachers.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>👩‍🏫 Teacher Portal</h3>
+      <p>Teachers can post announcements and update schedules.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>📚 Subject Organizer</h3>
+      <p>Announcements are grouped by subject.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>⏳ Countdown Widget</h3>
+      <p>See how many days remain before an exam or presentation.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>🚨 Emergency Alerts</h3>
+      <p>Receive suspension, weather, and campus emergency notifications.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DEMO ================= -->
+
+<section id="demo" class="info-section">
+  <div class="section-title">
+    <h2>How ARKOBOMBS Works</h2>
+    <p>Teacher announces → ARKOBOMBS organizes → Student acts.</p>
+  </div>
+
+  <div class="demo-flow">
+    <div class="flow-card">
+      <h3>1️⃣ Teacher Creates Announcement</h3>
+      <p>Posts quizzes, laboratory exams, presentations, and reminders.</p>
+    </div>
+
+    <div class="flow-card">
+      <h3>2️⃣ ARKOBOMBS Synchronizes</h3>
+      <p>The announcement automatically appears on the dashboard, calendar, and notifications.</p>
+    </div>
+
+    <div class="flow-card">
+      <h3>3️⃣ Student Receives Reminder</h3>
+      <p>Students stay updated and prepared from one organized portal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ROADMAP ================= -->
+
+<section id="roadmap" class="info-section">
+  <div class="section-title">
+    <h2>CODEFEST 2026 Roadmap</h2>
+    <p>Our development plan for the hackathon prototype.</p>
+  </div>
+
+  <div class="roadmap">
+    <div class="roadmap-card">
+      <h3>✅ Phase 1</h3>
+      <p>Landing Page Prototype</p>
+    </div>
+
+    <div class="roadmap-card">
+      <h3>✅ Phase 2</h3>
+      <p>Student Dashboard with Announcements</p>
+    </div>
+
+    <div class="roadmap-card">
+      <h3>✅ Phase 3</h3>
+      <p>Teacher Portal for Posting Updates</p>
+    </div>
+
+    <div class="roadmap-card">
+      <h3>🚀 Phase 4</h3>
+      <p>Calendar, Notifications, Countdown, and Emergency Alerts</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+  <h2>ARKOBOMBS</h2>
+  <p>From Announcement to Action.</p>
+  <small>CODEFEST 2026 • Academic Announcement & Readiness Platform</small>
+</footer>
+
+</div>
+<script src="js/app.js"></script>
 </body>
-</html>                
+</html>
