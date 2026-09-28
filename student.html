@@ -1,135 +1,651 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARKOBOMBS | Student Portal</title>
 
-    <title>ARKOBOMBS | Student Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-    <link rel="stylesheet" href="css/style.css">
+body{
+    font-family:'DM Sans',sans-serif;
+    background:
+      radial-gradient(circle at top left,#FAD5E7,transparent 35%),
+      radial-gradient(circle at top right,#DDD1FF,transparent 35%),
+      linear-gradient(135deg,#FFF8FD,#F5F0FF,#EDF5FF);
+    color:#2F285C;
+    padding:24px;
+}
+
+/* LAYOUT */
+
+.container{
+    max-width:1400px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:250px 1fr;
+    gap:22px;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    background:rgba(255,255,255,.68);
+    backdrop-filter:blur(18px);
+    border-radius:28px;
+    padding:24px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    box-shadow:0 18px 35px rgba(90,65,170,.10);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:28px;
+}
+
+.logo-circle{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#B36AF8,#6B45F5);
+    color:white;
+    display:grid;
+    place-items:center;
+    font-weight:bold;
+    font-size:22px;
+}
+
+.logo h2{
+    font-family:"Playfair Display",serif;
+    color:#5B31C9;
+}
+
+.logo span{
+    color:#80789E;
+    font-size:12px;
+}
+
+/* STUDENT CARD */
+
+.student-card{
+    background:rgba(255,255,255,.72);
+    border-radius:24px;
+    padding:22px;
+    text-align:center;
+}
+
+.student-avatar{
+    width:78px;
+    height:78px;
+    border-radius:50%;
+    margin:auto auto 15px;
+    background:linear-gradient(135deg,#B56AF8,#7647F5);
+    display:grid;
+    place-items:center;
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.student-card h3{
+    color:#5B31C9;
+}
+
+.student-card p{
+    color:#81789F;
+    font-size:13px;
+    margin-top:6px;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:16px;
+    padding:8px 14px;
+    border-radius:999px;
+    background:#F3E8FF;
+    color:#6B21A8;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.online-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#22C55E;
+}
+
+.logout{
+    margin-top:30px;
+    padding:14px;
+    border:none;
+    border-radius:16px;
+    background:#FFE6F3;
+    color:#D63384;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* MAIN */
+
+.main{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+}
+
+.header{
+    background:rgba(255,255,255,.70);
+    backdrop-filter:blur(18px);
+    border-radius:28px;
+    padding:28px;
+    box-shadow:0 15px 30px rgba(90,65,170,.08);
+}
+
+.header h1{
+    font-family:"Playfair Display",serif;
+    color:#5630C4;
+    font-size:36px;
+}
+
+.header p{
+    color:#756E93;
+    margin-top:8px;
+}
+
+/* WEATHER ALERT */
+
+.alert{
+    background:linear-gradient(135deg,#F973A6,#A855F7);
+    color:white;
+    padding:20px 24px;
+    border-radius:24px;
+}
+
+.alert small{
+    opacity:.85;
+}
+
+/* SUMMARY */
+
+.summary{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:rgba(255,255,255,.72);
+    backdrop-filter:blur(16px);
+    border-radius:22px;
+    padding:22px;
+}
+
+.card span{
+    color:#756E95;
+    font-size:13px;
+}
+
+.card h2{
+    margin-top:8px;
+    color:#6030C8;
+    font-size:34px;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+}
+
+.section{
+    background:rgba(255,255,255,.72);
+    backdrop-filter:blur(16px);
+    border-radius:26px;
+    padding:24px;
+}
+
+.section h2{
+    font-family:"Playfair Display",serif;
+    color:#5630C4;
+    margin-bottom:20px;
+}
+
+/* COUNTDOWN */
+
+.countdown{
+    background:linear-gradient(135deg,#A855F7,#5B46F3);
+    color:white;
+    border-radius:24px;
+    padding:24px;
+}
+
+.countdown h3{
+    margin:10px 0;
+    font-size:28px;
+}
+
+.time{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-top:20px;
+}
+
+.time div{
+    background:rgba(255,255,255,.18);
+    padding:14px;
+    border-radius:16px;
+    text-align:center;
+}
+
+.time strong{
+    display:block;
+    font-size:24px;
+}
+
+/* CALENDAR */
+
+.calendar{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:8px;
+}
+
+.calendar div{
+    background:#F6F2FF;
+    padding:10px;
+    border-radius:12px;
+    text-align:center;
+    font-size:13px;
+}
+
+.today{
+    background:#A855F7!important;
+    color:white;
+    font-weight:bold;
+}
+
+.event{
+    background:#FFDCEC!important;
+    color:#B01A76;
+    font-weight:bold;
+}
+
+/* SUBJECTS */
+
+.subject{
+    background:#FCFBFF;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:16px;
+    border-left:5px solid #8B5CF6;
+}
+
+.subject h3{
+    color:#5D31C8;
+}
+
+.subject p{
+    color:#726B90;
+    margin-top:8px;
+}
+
+/* NOTIFICATIONS */
+
+.notice{
+    display:flex;
+    gap:14px;
+    margin-bottom:20px;
+}
+
+.dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    margin-top:8px;
+}
+
+.purple{background:#8B5CF6;}
+.pink{background:#EC4899;}
+.blue{background:#38BDF8;}
+.orange{background:#FB923C;}
+
+.notice h4{
+    color:#5630C8;
+}
+
+.notice small{
+    color:#847C9E;
+}
+
+.notice p{
+    color:#6F688B;
+    margin-top:5px;
+    font-size:14px;
+}
+
+/* QUICK ACTIONS */
+
+.actions{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:18px;
+}
+
+.action{
+    background:linear-gradient(135deg,#FFFFFF,#F7F3FF);
+    border-radius:22px;
+    padding:20px;
+    text-decoration:none;
+    color:#2F285C;
+    transition:.25s;
+    box-shadow:0 8px 18px rgba(90,65,170,.08);
+}
+
+.action:hover{
+    transform:translateY(-5px);
+}
+
+.action h3{
+    color:#5B31C9;
+    margin:12px 0 8px;
+}
+
+.action p{
+    color:#766E93;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.action-icon{
+    font-size:34px;
+}
+
+/* MOBILE */
+
+@media(max-width:980px){
+
+.container{
+    grid-template-columns:1fr;
+}
+
+.grid{
+    grid-template-columns:1fr;
+}
+
+.time{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+</style>
 </head>
 
 <body>
 
-    <div class="dashboard-page">
+<div class="container">
 
-       <nav class="dashboard-nav">
-    <div class="logo">
-        <div class="logo-circle">A</div>
-        <div>
-            <h3>ARKOBOMBS</h3>
-            <span>Academic Readiness Platform</span>
-        </div>
-    </div>
+<!-- SIDEBAR -->
 
-    <div class="dashboard-actions">
-        <a href="index.html" class="home-button">← Home</a>
-        <div class="student-info">IT11B</div>
-    </div>
-</nav>
+<aside class="sidebar">
 
+<div>
 
-        <main class="student-dashboard">
+<div class="logo">
+<div class="logo-circle">A</div>
 
-            <div class="welcome">
-                <span>STUDENT DASHBOARD</span>
-
-                <h1>Stay Ready.<br>Stay Organized.</h1>
-
-                <p>
-                    Keep track of your academic events,
-                    announcements, requirements, and schedule updates.
-                </p>
-            </div>
-
-
-            <section class="next-event">
-
-    <div class="event-label">
-        NEXT ACADEMIC EVENT
-    </div>
-
-    <h2 id="studentSubject">Programming I</h2>
-
-    <h3 id="studentEventType">Laboratory Examination</h3>
-
-    <p class="event-date" id="studentEventDate">
-        September 24 · 1:00 PM
-    </p>
-
-    <p class="event-date" id="studentEventLocation">
-        📍 Computer Laboratory
-    </p>
-
-    <!-- COUNTDOWN -->
-<div class="countdown">
-
-    <div>
-        <strong id="studentDays">05</strong>
-        <span>DAYS</span>
-    </div>
-
-    <div>
-        <strong id="studentHours">12</strong>
-        <span>HOURS</span>
-    </div>
-
-    <div>
-        <strong id="studentMinutes">34</strong>
-        <span>MINUTES</span>
-    </div>
+<div>
+<h2>ARKOBOMBS</h2>
+<span>Student Portal</span>
+</div>
 
 </div>
 
-    <!-- REQUIREMENTS -->
-    <div class="event-section">
+<div class="student-card">
 
-        <span>REQUIREMENTS</span>
+<div class="student-avatar">A</div>
 
-        <h3>Bring the Following</h3>
+<h3>Angelica Wenceslao</h3>
 
-        <ul id="studentRequirements">
-            <li>Loading requirements...</li>
-        </ul>
+<p>BSIT • IT11B Student</p>
 
+<div class="status">
+<div class="online-dot"></div>
+Ready for Classes
+</div>
+
+</div>
+
+</div>
+
+<button class="logout">Log Out</button>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main">
+
+<div class="header">
+
+<h1>Good Morning, Angelica 👋</h1>
+
+<p>Sunday • September 27, 2026 • Academic Readiness Dashboard</p>
+
+</div>
+
+<div class="alert">
+
+<small>⚠ WEATHER ADVISORY</small>
+
+<h3>Classes may shift to asynchronous learning if Signal No. 2 is announced.</h3>
+
+<p>Please wait for official announcements from your teachers.</p>
+
+</div>
+
+<section class="summary">
+
+<div class="card">
+<span>Upcoming Exams</span>
+<h2>03</h2>
+</div>
+
+<div class="card">
+<span>New Announcements</span>
+<h2>08</h2>
+</div>
+
+<div class="card">
+<span>Pending Tasks</span>
+<h2>05</h2>
+</div>
+
+<div class="card">
+<span>Completed Activities</span>
+<h2>12</h2>
+</div>
+
+</section>
+
+<div class="grid">
+
+<section class="countdown">
+
+<small>NEXT ACADEMIC EVENT</small>
+
+<h3>Programming 1 Laboratory Examination</h3>
+
+<p>September 24 • Computer Laboratory</p>
+
+<div class="time">
+
+<div>
+<strong id="days">05</strong>
+Days
+</div>
+
+<div>
+<strong id="hours">12</strong>
+Hours
+</div>
+
+<div>
+<strong id="minutes">34</strong>
+Minutes
+</div>
+
+<div>
+<strong id="seconds">15</strong>
+Seconds
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+    <div class="section-title">
+        <h2>Latest Teacher Announcements</h2>
     </div>
 
-    <!-- COVERAGE -->
-    <div class="event-section">
-
-        <span>COVERAGE</span>
-
-        <h3>Topics to Review</h3>
-
-        <ul id="studentCoverage">
-            <li>Loading coverage...</li>
-        </ul>
-
+    <div id="announcementList">
+        <!-- Teacher announcements will appear here automatically -->
     </div>
 
-       <a href="event.html" class="dashboard-button">
-        VIEW DETAILS →
-    </a>
+</section>
 
+</div>
 
-<section class="next-event">
+<div class="grid">
 
-    <div class="event-label">
-        LATEST ANNOUNCEMENT
-    </div>
+<section class="section">
 
-    <h2 id="announcementTitle">
-        No announcement yet
-    </h2>
+<h2>Subject Organizer</h2>
 
-    <p id="announcementContent">
-        Your teacher's published announcements will appear here.
-    </p>
+<div class="subject">
+<h3>💻 Programming 1</h3>
+<p>Laboratory Examination • Sept. 24</p>
+<p>Coverage: Loops, Methods, Arrays.</p>
+</div>
+
+<div class="subject">
+<h3>📐 Calculus</h3>
+<p>Quiz moved to Sept. 24.</p>
+</div>
+
+<div class="subject">
+<h3>🧪 Chemistry</h3>
+<p>Stoichiometry Quiz • Oct. 2</p>
+</div>
+
+<div class="subject">
+<h3>🌍 Science, Technology & Society</h3>
+<p>Presentation • Sept. 27.</p>
+</div>
+
+<div class="subject">
+<h3>📖 Research</h3>
+<p>Defense Preparation • Oct. 5.</p>
+</div>
+
+</section>
+
+<section class="section">
+
+<h2>Notifications</h2>
+
+<div class="notice">
+<div class="dot purple"></div>
+<div>
+<small>Today • 9:15 AM</small>
+<h4>Programming Laboratory Exam Reminder</h4>
+<p>Bring school ID and laboratory worksheet.</p>
+</div>
+</div>
+
+<div class="notice">
+<div class="dot pink"></div>
+<div>
+<small>Yesterday</small>
+<h4>Calculus Quiz Updated</h4>
+<p>The quiz has been moved to Sept. 24.</p>
+</div>
+</div>
+
+<div class="notice">
+<div class="dot blue"></div>
+<div>
+<small>Sept. 26</small>
+<h4>STS Presentation Rubric Uploaded</h4>
+<p>Review the presentation guidelines before reporting.</p>
+</div>
+</div>
+
+<div class="notice">
+<div class="dot orange"></div>
+<div>
+<small>Sept. 25</small>
+<h4>Research Deadline Extended</h4>
+<p>Printed manuscript submission moved to Oct. 5.</p>
+</div>
+</div>
+
+</section>
+
+</div>
+
+<section class="section">
+
+<h2>Quick Actions</h2>
+
+<div class="actions">
+
+<a class="action" href="calendar.html">
+<div class="action-icon">📅</div>
+<h3>Academic Calendar</h3>
+<p>See quizzes, exams, deadlines and presentations.</p>
+</a>
+
+<a class="action" href="notifications.html">
+<div class="action-icon">🔔</div>
+<h3>Notifications</h3>
+<p>View all announcements and reminders.</p>
+</a>
+
+<a class="action" href="#">
+<div class="action-icon">📚</div>
+<h3>Subjects</h3>
+<p>Organize all subject schedules in one place.</p>
+</a>
+
+<a class="action" href="index.html">
+<div class="action-icon">🏠</div>
+<h3>Homepage</h3>
+<p>Return to the ARKOBOMBS landing page.</p>
+</a>
+
+</div>
 
 </section>
 
@@ -138,161 +654,30 @@
 </div>
 
 <script>
-    
 
-    const savedAnnouncement = localStorage.getItem("arkobombsAnnouncement");
+const targetDate = new Date("September 24, 2027 13:00:00").getTime();
 
-if (savedAnnouncement) {
-    document.getElementById("announcementTitle").textContent =
-        "New Academic Announcement";
+function updateCountdown(){
 
-    document.getElementById("announcementContent").textContent =
-        savedAnnouncement;
-}
-const savedSubject = localStorage.getItem("arkobombsSubject");
+const now = new Date().getTime();
+const distance = targetDate - now;
 
-const savedEventType = localStorage.getItem("arkobombsEventType");
+if(distance < 0) return;
 
-const savedEventDate = localStorage.getItem("arkobombsEventDate");
+const days = Math.floor(distance/(1000*60*60*24));
+const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+const seconds = Math.floor((distance%(1000*60))/1000);
 
-const savedEventTime = localStorage.getItem("arkobombsEventTime");
-const savedEventLocation =
-    localStorage.getItem("arkobombsEventLocation");
-    const savedRequirements =
-    localStorage.getItem("arkobombsRequirements");
+document.getElementById("days").innerHTML = String(days).padStart(2,"0");
+document.getElementById("hours").innerHTML = String(hours).padStart(2,"0");
+document.getElementById("minutes").innerHTML = String(minutes).padStart(2,"0");
+document.getElementById("seconds").innerHTML = String(seconds).padStart(2,"0");
 
-if (savedRequirements) {
-    console.log("Requirements:", savedRequirements);
 }
 
-if (savedSubject) {
-    document.getElementById("studentSubject").textContent =
-        savedSubject;
-}
-
-if (savedEventType) {
-    document.getElementById("studentEventType").textContent =
-        savedEventType;
-}
-
-if (savedEventDate || savedEventTime) {
-    document.getElementById("studentEventDate").textContent =
-        "📅 " +
-        (savedEventDate || "Date not specified") +
-        " · " +
-        (savedEventTime || "Time not specified");
-}
-
-if (savedEventLocation) {
-    document.getElementById("studentEventLocation").textContent =
-        "📍 " + savedEventLocation;
-}
-
-const upcomingEvent = document.getElementById("upcomingEvent");
-
-const savedUpcomingSubject =
-    localStorage.getItem("arkobombsSubject");
-
-const savedUpcomingType =
-    localStorage.getItem("arkobombsEventType");
-
-const savedUpcomingDate =
-    localStorage.getItem("arkobombsEventDate");
-    
-if (savedUpcomingSubject && savedUpcomingType && savedUpcomingDate && upcomingEvent) {
-    upcomingEvent.textContent =
-        savedUpcomingDate + " — " +
-        savedUpcomingSubject + " " +
-        savedUpcomingType;
-}
-const studentRequirementsData =
-    localStorage.getItem("arkobombsRequirements");
-const requirementsList =
-    document.getElementById("studentRequirements");
-
-if (studentRequirementsData && requirementsList) {
-    requirementsList.innerHTML = "";
-
-    const requirements =
-    studentRequirementsData.split(", ");
-
-    requirements.forEach(function(requirement) {
-        const li = document.createElement("li");
-        li.textContent = requirement;
-        requirementsList.appendChild(li);
-    });
-}
-const studentCoverageData =
-    localStorage.getItem("arkobombsCoverage");
-
-const coverageList =
-    document.getElementById("studentCoverage");
-
-if (studentCoverageData && coverageList) {
-    coverageList.innerHTML = "";
-
-    const coverageItems =
-        studentCoverageData.split(", ");
-
-    coverageItems.forEach(function(topic) {
-        const li = document.createElement("li");
-        li.textContent = topic;
-        coverageList.appendChild(li);
-    });
-}
-const studentSavedDate =
-    localStorage.getItem("arkobombsEventDate");
-
-const studentSavedTime =
-    localStorage.getItem("arkobombsEventTime");
-
-if (studentSavedDate && studentSavedTime) {
-
-    const studentEventDate = new Date(
-        `${studentSavedDate}, 2026 ${studentSavedTime}`
-    ).getTime();
-
-    function updateStudentCountdown() {
-
-        const now = new Date().getTime();
-
-        const distance = studentEventDate - now;
-
-        if (distance <= 0) {
-            document.getElementById("studentDays").textContent = "00";
-            document.getElementById("studentHours").textContent = "00";
-            document.getElementById("studentMinutes").textContent = "00";
-            return;
-        }
-
-        const days = Math.floor(
-            distance / (1000 * 60 * 60 * 24)
-        );
-
-        const hours = Math.floor(
-            (distance % (1000 * 60 * 60 * 24)) /
-            (1000 * 60 * 60)
-        );
-
-        const minutes = Math.floor(
-            (distance % (1000 * 60 * 60)) /
-            (1000 * 60)
-        );
-
-        document.getElementById("studentDays").textContent =
-            String(days).padStart(2, "0");
-
-        document.getElementById("studentHours").textContent =
-            String(hours).padStart(2, "0");
-
-        document.getElementById("studentMinutes").textContent =
-            String(minutes).padStart(2, "0");
-    }
-
-    updateStudentCountdown();
-
-        setInterval(updateStudentCountdown, 1000);
-}
+updateCountdown();
+setInterval(updateCountdown,1000);
 
 </script>
 

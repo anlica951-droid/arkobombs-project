@@ -27,7 +27,7 @@ body{
     min-height:100vh;
     overflow:auto;
     background:
-        radial-gradient(circle at top left,#FFD6EA 0%,transparent 30%),
+        radial-gradient(circle at top left,#131212 0%,transparent 30%),
         radial-gradient(circle at top right,#D8C8FF 0%,transparent 35%),
         radial-gradient(circle at bottom left,#E9E2FF 0%,transparent 40%),
         linear-gradient(180deg,#FFF9FF,#F7F4FF,#EEF2FF);
@@ -104,7 +104,7 @@ body{
 
 .logo h3{
     font-family:Merriweather,serif;
-    color:#5B21B6;
+    color:#6221b6;
 }
 
 .logo span{

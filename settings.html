@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ARKOBOMBS | Settings</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:"DM Sans",sans-serif;
+background:
+radial-gradient(circle at top left,#FAD2E8,transparent 35%),
+radial-gradient(circle at top right,#DDD0FF,transparent 35%),
+linear-gradient(135deg,#FFF5FC,#F3EEFF,#EEF6FF);
+padding:24px;
+color:#2F285C;
+}
+
+.container{
+max-width:1400px;
+margin:auto;
+display:grid;
+grid-template-columns:250px 1fr;
+gap:24px;
+}
+
+/* Sidebar */
+
+.sidebar{
+background:rgba(255,255,255,.72);
+backdrop-filter:blur(18px);
+border-radius:28px;
+padding:24px;
+box-shadow:0 15px 35px rgba(90,65,170,.1);
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:35px;
+}
+
+.circle{
+width:48px;
+height:48px;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:linear-gradient(135deg,#A855F7,#6945F4);
+color:white;
+font-size:20px;
+font-weight:bold;
+}
+
+.logo h2{
+font-family:"Playfair Display",serif;
+color:#6035D8;
+}
+
+.logo span{
+font-size:11px;
+color:#7B7398;
+}
+
+.menu{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.menu a{
+text-decoration:none;
+padding:14px 16px;
+border-radius:16px;
+font-weight:600;
+color:#726B90;
+transition:.25s;
+}
+
+.menu a:hover,
+.menu .active{
+background:linear-gradient(135deg,#A855F7,#6945F4);
+color:white;
+}
+
+/* Main */
+
+.main{
+display:flex;
+flex-direction:column;
+gap:24px;
+}
+
+.header{
+background:rgba(255,255,255,.72);
+backdrop-filter:blur(18px);
+padding:24px 28px;
+border-radius:28px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 15px 30px rgba(90,65,170,.08);
+}
+
+.header h1{
+font-family:"Playfair Display",serif;
+font-size:34px;
+color:#6035D8;
+}
+
+.header p{
+color:#756E93;
+margin-top:6px;
+}
+
+.back-btn{
+background:linear-gradient(135deg,#A855F7,#6945F4);
+color:white;
+padding:12px 20px;
+border-radius:14px;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* Cards */
+
+.card{
+background:rgba(255,255,255,.75);
+padding:24px;
+border-radius:28px;
+box-shadow:0 15px 30px rgba(90,65,170,.08);
+}
+
+.card h2{
+font-family:"Playfair Display",serif;
+color:#6035D8;
+margin-bottom:20px;
+}
+
+/* Profile */
+
+.profile{
+display:flex;
+align-items:center;
+gap:22px;
+}
+
+.avatar{
+width:95px;
+height:95px;
+border-radius:50%;
+display:grid;
+place-items:center;
+font-size:38px;
+font-weight:bold;
+color:white;
+background:linear-gradient(135deg,#A855F7,#6945F4);
+}
+
+.profile h3{
+font-size:26px;
+color:#5630C8;
+}
+
+.profile p{
+color:#756E93;
+margin-top:6px;
+line-height:1.5;
+}
+
+/* Settings */
+
+.setting{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 0;
+border-bottom:1px solid #EEE7FF;
+}
+
+.setting:last-child{
+border:none;
+}
+
+.setting h4{
+color:#5630C8;
+margin-bottom:4px;
+}
+
+.setting p{
+font-size:14px;
+color:#7B7398;
+}
+
+/* Toggle */
+
+.switch{
+position:relative;
+width:54px;
+height:30px;
+}
+
+.switch input{
+display:none;
+}
+
+.slider{
+position:absolute;
+cursor:pointer;
+inset:0;
+background:#D8CFFF;
+border-radius:999px;
+transition:.3s;
+}
+
+.slider:before{
+content:"";
+position:absolute;
+width:22px;
+height:22px;
+left:4px;
+top:4px;
+background:white;
+border-radius:50%;
+transition:.3s;
+}
+
+input:checked + .slider{
+background:#8B5CF6;
+}
+
+input:checked + .slider:before{
+transform:translateX(24px);
+}
+
+/* Theme Colors */
+
+.colors{
+display:flex;
+gap:18px;
+margin-top:10px;
+}
+
+.color{
+width:52px;
+height:52px;
+border-radius:50%;
+cursor:pointer;
+border:4px solid transparent;
+transition:.25s;
+}
+
+.color:hover{
+transform:scale(1.08);
+}
+
+.color.active{
+border-color:#2F285C;
+}
+
+.purple{background:#8B5CF6;}
+.pink{background:#EC4899;}
+.blue{background:#38BDF8;}
+.orange{background:#FB923C;}
+
+/* Security Buttons */
+
+.button{
+margin-top:16px;
+display:inline-block;
+padding:14px 20px;
+border-radius:14px;
+background:linear-gradient(135deg,#A855F7,#6945F4);
+color:white;
+text-decoration:none;
+font-weight:bold;
+margin-right:12px;
+}
+
+.outline{
+background:white;
+color:#6945F4;
+border:2px solid #D8CFFF;
+}
+
+/* Footer */
+
+.footer{
+text-align:center;
+padding:10px;
+color:#887FA7;
+font-size:13px;
+}
+
+@media(max-width:950px){
+
+.container{
+grid-template-columns:1fr;
+}
+
+.profile{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.header{
+flex-direction:column;
+align-items:flex-start;
+gap:16px;
+}
+
+.setting{
+flex-direction:column;
+align-items:flex-start;
+gap:14px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+<div>
+
+<div class="logo">
+<div class="circle">A</div>
+<div>
+<h2>ARKOBOMBS</h2>
+<span>Settings</span>
+</div>
+</div>
+
+<div class="menu">
+<a href="student.html">🏠 Dashboard</a>
+<a href="calendar.html">📅 Calendar</a>
+<a href="notifications.html">🔔 Notifications</a>
+<a class="active" href="#">⚙️ Settings</a>
+<a href="index.html">🌐 Homepage</a>
+</div>
+
+</div>
+
+</aside>
+
+<!-- Main -->
+
+<main class="main">
+
+<div class="header">
+
+<div>
+<h1>Settings & Profile</h1>
+<p>Manage your account, notifications, reminders, and appearance.</p>
+</div>
+
+<a href="student.html" class="back-btn">← Student Dashboard</a>
+
+</div>
+
+<!-- PROFILE -->
+
+<section class="card">
+
+<h2>Student Profile</h2>
+
+<div class="profile">
+
+<div class="avatar">A</div>
+
+<div>
+<h3>Angelica Wenceslao</h3>
+<p>
+Grade 11 • IT11B<br>
+Academic Readiness Platform Member
+</p>
+
+<p style="margin-top:12px;color:#6035D8;font-weight:bold;">
+Student ID • ARK2026-1142
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- NOTIFICATIONS -->
+
+<section class="card">
+
+<h2>Notification Preferences</h2>
+
+<div class="setting">
+<div>
+<h4>Academic Announcements</h4>
+<p>Receive announcements from teachers immediately.</p>
+</div>
+
+<label class="switch">
+<input checked type="checkbox">
+<span class="slider"></span>
+</label>
+</div>
+
+<div class="setting">
+<div>
+<h4>Exam Reminders</h4>
+<p>Get reminders 24 hours before quizzes and exams.</p>
+</div>
+
+<label class="switch">
+<input checked type="checkbox">
+<span class="slider"></span>
+</label>
+</div>
+
+<div class="setting">
+<div>
+<h4>Presentation Reminders</h4>
+<p>Notify me before reporting schedules.</p>
+</div>
+
+<label class="switch">
+<input checked type="checkbox">
+<span class="slider"></span>
+</label>
+</div>
+
+<div class="setting">
+<div>
+<h4>Research Deadlines</h4>
+<p>Receive reminders for manuscript and defense deadlines.</p>
+</div>
+
+<label class="switch">
+<input checked type="checkbox">
+<span class="slider"></span>
+</label>
+</div>
+
+<div class="setting">
+<div>
+<h4>Emergency Alerts</h4>
+<p>Always notify me about suspensions and weather advisories.</p>
+</div>
+
+<label class="switch">
+<input checked type="checkbox">
+<span class="slider"></span>
+</label>
+</div>
+
+</section>
+
+<!-- REMINDERS -->
+
+<section class="card">
+
+<h2>Reminder Settings</h2>
+
+<div class="setting">
+<div>
+<h4>1 Day Before Events</h4>
+<p>Receive reminders one day before academic events.</p>
+</div>
+
+<label class="switch">
+<input checked type="checkbox">
+<span class="slider"></span>
+</label>
+</div>
+
+<div class="setting">
+<div>
+<h4>1 Hour Before Events</h4>
+<p>Receive reminders one hour before scheduled activities.</p>
+</div>
+
+<label class="switch">
+<input checked type="checkbox">
+<span class="slider"></span>
+</label>
+</div>
+
+<div class="setting">
+<div>
+<h4>Morning Daily Summary</h4>
+<p>Every morning, receive today's academic schedule.</p>
+</div>
+
+<label class="switch">
+<input checked type="checkbox">
+<span class="slider"></span>
+</label>
+</div>
+
+</section>
+
+<!-- THEME -->
+
+<section class="card">
+
+<h2>Choose Theme Color</h2>
+
+<p style="margin-bottom:18px;color:#756E93;">
+Personalize your ARKOBOMBS dashboard appearance.
+</p>
+
+<div class="colors">
+
+<div class="color purple active"></div>
+<div class="color pink"></div>
+<div class="color blue"></div>
+<div class="color orange"></div>
+
+</div>
+
+</section>
+
+<!-- ACCOUNT -->
+
+<section class="card">
+
+<h2>Account & Security</h2>
+
+<div class="setting">
+<div>
+<h4>Change Password</h4>
+<p>Update your student account password.</p>
+</div>
+</div>
+
+<div class="setting">
+<div>
+<h4>Email Address</h4>
+<p>angelica@student.arkobombs.edu.ph</p>
+</div>
+</div>
+
+<div class="setting">
+<div>
+<h4>Two-Step Verification</h4>
+<p>Protect your account with additional verification.</p>
+</div>
+
+<label class="switch">
+<input type="checkbox">
+<span class="slider"></span>
+</label>
+</div>
+
+<a class="button" href="#">Save Changes</a>
+<a class="button outline" href="student.html">Cancel</a>
+
+</section>
+
+<div class="footer">
+ARKOBOMBS • CODEFEST 2026 MVP • From Announcement to Action.
+</div>
+
+</main>
+
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>

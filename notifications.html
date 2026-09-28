@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ARKOBOMBS | Notification Center</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:"DM Sans",sans-serif;
+background:
+radial-gradient(circle at top left,#FAD2E8,transparent 35%),
+radial-gradient(circle at top right,#DDD0FF,transparent 35%),
+linear-gradient(135deg,#FFF5FC,#F3EEFF,#EEF6FF);
+padding:24px;
+color:#2F285C;
+}
+
+.container{
+max-width:1400px;
+margin:auto;
+display:grid;
+grid-template-columns:250px 1fr;
+gap:24px;
+}
+
+/* Sidebar */
+
+.sidebar{
+background:rgba(255,255,255,.72);
+backdrop-filter:blur(18px);
+border-radius:28px;
+padding:24px;
+box-shadow:0 15px 35px rgba(90,65,170,.1);
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:35px;
+}
+
+.circle{
+width:48px;
+height:48px;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:linear-gradient(135deg,#A855F7,#6945F4);
+color:white;
+font-size:20px;
+font-weight:bold;
+}
+
+.logo h2{
+font-family:"Playfair Display",serif;
+color:#6035D8;
+}
+
+.logo span{
+font-size:11px;
+color:#7B7398;
+}
+
+.menu{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.menu a{
+text-decoration:none;
+padding:14px 16px;
+border-radius:16px;
+font-weight:600;
+color:#726B90;
+transition:.25s;
+}
+
+.menu a:hover,
+.menu .active{
+background:linear-gradient(135deg,#A855F7,#6945F4);
+color:white;
+}
+
+/* Main */
+
+.main{
+display:flex;
+flex-direction:column;
+gap:24px;
+}
+
+.header{
+background:rgba(255,255,255,.72);
+backdrop-filter:blur(18px);
+padding:24px 28px;
+border-radius:28px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 15px 30px rgba(90,65,170,.08);
+}
+
+.header h1{
+font-family:"Playfair Display",serif;
+font-size:34px;
+color:#6035D8;
+}
+
+.header p{
+color:#756E93;
+margin-top:6px;
+}
+
+.back-btn{
+background:linear-gradient(135deg,#A855F7,#6945F4);
+color:white;
+padding:12px 20px;
+border-radius:14px;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* Search */
+
+.search-box{
+background:rgba(255,255,255,.75);
+padding:18px 22px;
+border-radius:20px;
+box-shadow:0 12px 25px rgba(90,65,170,.08);
+}
+
+.search-box input{
+width:100%;
+padding:14px 18px;
+border-radius:14px;
+border:none;
+background:#F7F4FF;
+font-size:15px;
+outline:none;
+}
+
+/* Filters */
+
+.filters{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.filter{
+padding:10px 18px;
+border-radius:999px;
+background:#F2E9FF;
+color:#6B45F5;
+font-weight:700;
+font-size:13px;
+cursor:pointer;
+transition:.25s;
+}
+
+.filter.active,
+.filter:hover{
+background:linear-gradient(135deg,#A855F7,#6945F4);
+color:white;
+}
+
+/* Emergency Alert */
+
+.emergency{
+background:linear-gradient(135deg,#EC4899,#FB7185);
+color:white;
+padding:24px;
+border-radius:24px;
+box-shadow:0 15px 30px rgba(236,72,153,.25);
+}
+
+.emergency small{
+opacity:.9;
+letter-spacing:1px;
+}
+
+.emergency h2{
+margin:10px 0;
+font-size:28px;
+}
+
+.emergency p{
+line-height:1.6;
+}
+
+/* Notifications */
+
+.section{
+background:rgba(255,255,255,.75);
+padding:24px;
+border-radius:28px;
+box-shadow:0 15px 30px rgba(90,65,170,.08);
+}
+
+.section h2{
+font-family:"Playfair Display",serif;
+color:#6035D8;
+margin-bottom:22px;
+}
+
+.notification{
+display:flex;
+gap:18px;
+padding:20px;
+border-radius:20px;
+margin-bottom:16px;
+background:#FCFBFF;
+transition:.25s;
+cursor:pointer;
+}
+
+.notification:hover{
+transform:translateY(-4px);
+box-shadow:0 10px 20px rgba(90,65,170,.08);
+}
+
+.icon{
+width:54px;
+height:54px;
+border-radius:16px;
+display:grid;
+place-items:center;
+font-size:24px;
+color:white;
+flex-shrink:0;
+}
+
+.exam{background:#EC4899;}
+.quiz{background:#8B5CF6;}
+.presentation{background:#38BDF8;}
+.research{background:#FB923C;}
+.weather{background:#F59E0B;}
+.system{background:#10B981;}
+
+.content{
+flex:1;
+}
+
+.time{
+font-size:12px;
+color:#887FA7;
+margin-bottom:6px;
+}
+
+.content h3{
+color:#5630C8;
+margin-bottom:6px;
+font-size:17px;
+}
+
+.content p{
+color:#726B90;
+line-height:1.6;
+font-size:14px;
+}
+
+.badges{
+display:flex;
+gap:10px;
+margin-top:12px;
+flex-wrap:wrap;
+}
+
+.badge{
+padding:6px 12px;
+border-radius:999px;
+font-size:11px;
+font-weight:bold;
+color:white;
+}
+
+.badge.new{background:#EC4899;}
+.badge.read{background:#22C55E;}
+.badge.updated{background:#8B5CF6;}
+.badge.urgent{background:#F97316;}
+
+/* Mobile */
+
+@media(max-width:950px){
+
+.container{
+grid-template-columns:1fr;
+}
+
+.header{
+flex-direction:column;
+align-items:flex-start;
+gap:16px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+<div>
+
+<div class="logo">
+<div class="circle">A</div>
+<div>
+<h2>ARKOBOMBS</h2>
+<span>Notification Center</span>
+</div>
+</div>
+
+<div class="menu">
+<a href="student.html">🏠 Dashboard</a>
+<a href="calendar.html">📅 Calendar</a>
+<a class="active" href="#">🔔 Notifications</a>
+<a href="teacher.html">👩‍🏫 Teacher Portal</a>
+<a href="index.html">🌐 Homepage</a>
+</div>
+
+</div>
+
+</aside>
+
+<!-- Main -->
+
+<main class="main">
+
+<div class="header">
+
+<div>
+<h1>Notifications Center</h1>
+<p>All academic announcements and emergency alerts in one place.</p>
+</div>
+
+<a href="student.html" class="back-btn">← Student Dashboard</a>
+
+</div>
+
+<div class="search-box">
+<input type="text" placeholder="Search announcements, exams, quizzes...">
+</div>
+
+<div class="filters">
+<div class="filter active">All</div>
+<div class="filter">Exams</div>
+<div class="filter">Quizzes</div>
+<div class="filter">Research</div>
+<div class="filter">Emergency</div>
+<div class="filter">Updates</div>
+</div>
+
+<!-- Emergency -->
+
+<div class="emergency">
+
+<small>OFFICIAL SCHOOL ADVISORY</small>
+
+<h2>⚠️ Typhoon Signal No. 2 Advisory</h2>
+
+<p>
+Classes may shift to asynchronous learning depending on the latest
+announcement from the administration. Stay updated through ARKOBOMBS.
+</p>
+
+</div>
+
+<!-- Notifications -->
+
+<section class="section">
+
+<h2>Latest Notifications</h2>
+
+<div class="notification">
+
+<div class="icon exam">📢</div>
+
+<div class="content">
+
+<div class="time">Today • 9:15 AM</div>
+
+<h3>Programming Laboratory Examination Reminder</h3>
+
+<p>
+Bring your school ID, laboratory worksheet, and review Loops,
+Methods, Arrays, and Conditional Statements.
+</p>
+
+<div class="badges">
+<span class="badge new">NEW</span>
+<span class="badge updated">EXAM</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="notification">
+
+<div class="icon quiz">📐</div>
+
+<div class="content">
+
+<div class="time">Yesterday • 4:20 PM</div>
+
+<h3>Calculus Quiz Schedule Updated</h3>
+
+<p>
+The Calculus Quiz has been moved from September 22 to September 24.
+Please check your updated calendar schedule.
+</p>
+
+<div class="badges">
+<span class="badge updated">UPDATED</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="notification">
+
+<div class="icon presentation">🎤</div>
+
+<div class="content">
+
+<div class="time">September 26 • 7:40 PM</div>
+
+<h3>STS Presentation Rubrics Uploaded</h3>
+
+<p>
+Presentation order, grading criteria, and reporting schedule are now available.
+</p>
+
+<div class="badges">
+<span class="badge new">NEW</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="notification">
+
+<div class="icon research">📖</div>
+
+<div class="content">
+
+<div class="time">September 25 • 2:10 PM</div>
+
+<h3>Research Defense Deadline Extended</h3>
+
+<p>
+Printed manuscript submission has been moved to October 5.
+Please submit before 5:00 PM.
+</p>
+
+<div class="badges">
+<span class="badge updated">DEADLINE</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="notification">
+
+<div class="icon weather">🌧️</div>
+
+<div class="content">
+
+<div class="time">September 25 • 9:00 AM</div>
+
+<h3>Weather Advisory</h3>
+
+<p>
+Heavy rainfall is expected this afternoon. Monitor official school announcements
+for possible suspension of classes.
+</p>
+
+<div class="badges">
+<span class="badge urgent">URGENT</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="notification">
+
+<div class="icon system">✅</div>
+
+<div class="content">
+
+<div class="time">September 24 • 6:30 PM</div>
+
+<h3>Assignment Successfully Submitted</h3>
+
+<p>
+Your Programming 1 laboratory worksheet has been marked as submitted.
+</p>
+
+<div class="badges">
+<span class="badge read">READ</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="notification">
+
+<div class="icon system">📅</div>
+
+<div class="content">
+
+<div class="time">September 23 • 8:00 AM</div>
+
+<h3>New Academic Event Added</h3>
+
+<p>
+Chemistry Stoichiometry Quiz has been added to your Academic Calendar for September 30.
+</p>
+
+<div class="badges">
+<span class="badge new">NEW EVENT</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="notification">
+
+<div class="icon presentation">📚</div>
+
+<div class="content">
+
+<div class="time">September 22 • 5:15 PM</div>
+
+<h3>Coverage Updated for Programming 1 Exam</h3>
+
+<p>
+Coverage now includes Arrays, Loops, Methods, and Conditional Statements.
+</p>
+
+<div class="badges">
+<span class="badge updated">UPDATED</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>
