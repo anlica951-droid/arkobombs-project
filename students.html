@@ -1,0 +1,2122 @@
+<escape><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARKOBOMBS • Student Portal</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+:root{
+    --primary:#7C5CFF;
+    --secondary:#A855F7;
+    --blue:#6366F1;
+    --pink:#EC4899;
+    --green:#10B981;
+    --orange:#F59E0B;
+    --red:#EF4444;
+    --bg:#F8F6FF;
+    --card:rgba(255,255,255,.82);
+    --text:#2D2355;
+    --muted:#847C9C;
+}
+
+body{
+    background:linear-gradient(180deg,#F8F6FF,#F1ECFF);
+    color:var(--text);
+    min-height:100vh;
+}
+
+/* ---------- NAVBAR ---------- */
+
+.top{
+    position:sticky;
+    top:0;
+    z-index:999;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 26px;
+    background:rgba(255,255,255,.8);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(124,92,255,.08);
+}
+
+.brand{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.logo{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--secondary),var(--blue));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-weight:900;
+    box-shadow:0 8px 20px rgba(124,92,255,.35);
+}
+
+.brand h2{
+    font-size:15px;
+    font-weight:800;
+}
+
+.brand p{
+    font-size:11px;
+    color:var(--muted);
+}
+
+.badge{
+    background:#EEE8FF;
+    color:var(--primary);
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:700;
+}
+
+/* ---------- PAGE ---------- */
+
+.page{
+    max-width:1250px;
+    margin:auto;
+    padding:28px;
+}
+
+.label-small{
+    color:var(--primary);
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-weight:800;
+}
+
+.hero{
+    display:grid;
+    grid-template-columns:1.6fr .8fr;
+    gap:22px;
+    margin:22px 0 30px;
+}
+
+.hero-left h1{
+    font-family:'Merriweather',serif;
+    font-size:48px;
+    line-height:1.1;
+    color:#24184E;
+}
+
+.hero-left p{
+    margin-top:15px;
+    color:#6F6787;
+    line-height:1.7;
+    max-width:560px;
+}
+
+.hero-card{
+    border-radius:30px;
+    background:linear-gradient(135deg,#8B5CF6,#6366F1);
+    color:white;
+    padding:28px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    box-shadow:0 20px 40px rgba(108,77,255,.25);
+}
+
+.hero-card small{
+    letter-spacing:2px;
+    opacity:.8;
+}
+
+.hero-card h2{
+    margin:12px 0;
+    font-size:34px;
+    font-family:'Merriweather',serif;
+}
+
+/* ---------- STATS ---------- */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:18px;
+    margin-bottom:26px;
+}
+
+.stat{
+    background:var(--card);
+    backdrop-filter:blur(15px);
+    border-radius:24px;
+    padding:22px;
+    box-shadow:0 10px 30px rgba(88,63,163,.05);
+}
+
+.stat span{
+    color:#8E88A5;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.stat h3{
+    font-family:'Merriweather',serif;
+    font-size:30px;
+    margin-top:12px;
+}
+
+/* ---------- STUDY WIDGET ---------- */
+
+.study-widget{
+    background:linear-gradient(135deg,#EDE9FF,#F9F7FF);
+    border-radius:24px;
+    padding:20px;
+    margin-bottom:26px;
+}
+
+.study-widget h3{
+    font-family:'Merriweather',serif;
+    margin-bottom:15px;
+    color:#31245D;
+}
+
+.study-task{
+    background:white;
+    padding:14px;
+    border-radius:16px;
+    margin-bottom:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.study-task div small{
+    color:var(--muted);
+}
+/* ---------- TIMELINE ---------- */
+
+.timeline-item{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    padding:14px 0;
+    border-bottom:1px solid #EEE8FF;
+}
+
+.timeline-item:last-child{
+    border-bottom:none;
+}
+
+.timeline-dot{
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#8B5CF6,#6366F1);
+    margin-top:6px;
+    box-shadow:0 0 0 5px rgba(124,92,255,.15);
+    flex-shrink:0;
+}
+
+.timeline-item b{
+    color:#2D2355;
+}
+
+.timeline-item small{
+    color:#8B83A5;
+}
+
+/* ---------- TABS ---------- */
+
+.tabs{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    padding:6px 4px 14px;
+    margin-bottom:24px;
+
+    scrollbar-width:none;
+}
+
+.tabs::-webkit-scrollbar{
+    display:none;
+}
+
+.tab{
+    flex:0 0 auto;
+    border:none;
+    border-radius:999px;
+    padding:12px 18px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    background:white;
+    color:#6E6688;
+    transition:.25s;
+    box-shadow:0 4px 12px rgba(0,0,0,.05);
+}
+
+.tab.active{
+    background:linear-gradient(135deg,#7C5CFF,#6366F1);
+    color:white;
+}
+
+.hidden{
+    display:none;
+}
+
+/* ---------- CARDS ---------- */
+
+.card{
+    background:var(--card);
+    backdrop-filter:blur(15px);
+    border-radius:28px;
+    padding:24px;
+    margin-bottom:24px;
+    box-shadow:0 12px 30px rgba(92,69,173,.05);
+}
+
+.card-label{
+    color:#A099B7;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:10px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.card-title{
+    font-family:'Merriweather',serif;
+    font-size:28px;
+    color:#24184E;
+}
+
+.card-desc{
+    color:#706986;
+    margin-top:8px;
+    margin-bottom:18px;
+    line-height:1.6;
+    font-size:13px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:22px;
+}
+
+/* ---------- ANNOUNCEMENT CARD ---------- */
+
+.announcement{
+    background:#FAF9FF;
+    border:1px solid #ECE8FF;
+    border-radius:22px;
+    padding:18px;
+    margin-bottom:15px;
+    transition:.25s;
+}
+
+.announcement:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 28px rgba(124,92,255,.08);
+}
+
+.subject-tag{
+    display:inline-block;
+    background:#EEE8FF;
+    color:var(--primary);
+    font-size:10px;
+    padding:6px 12px;
+    border-radius:999px;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.announcement h4{
+    font-family:'Merriweather',serif;
+    color:#2B2255;
+    margin-bottom:8px;
+}
+
+.meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:14px;
+}
+
+.meta span{
+    background:white;
+    border:1px solid #ECEBFF;
+    padding:7px 12px;
+    border-radius:999px;
+    font-size:11px;
+}
+
+.read-btn{
+    margin-top:16px;
+    background:linear-gradient(135deg,#8B5CF6,#6366F1);
+    border:none;
+    color:white;
+    padding:11px 20px;
+    border-radius:999px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+
+/* ---------- SUBJECT CARDS ---------- */
+
+.subject-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:18px;
+}
+
+.subject-card{
+    border-radius:24px;
+    padding:22px;
+    color:white;
+    position:relative;
+    overflow:hidden;
+}
+
+.subject-card h3{
+    font-family:'Merriweather',serif;
+    margin:10px 0;
+}
+
+.subject-card p{
+    opacity:.92;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.coverage{
+    margin-top:18px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.coverage span{
+    background:rgba(255,255,255,.18);
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:10px;
+}
+.subject-header{
+    background:linear-gradient(135deg,#F2EDFF,#FBFAFF);
+    border:1px solid #E7DFFF;
+    box-shadow:0 12px 30px rgba(124,92,255,.08);
+}
+
+.subject-header .card-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media(max-width:900px){
+
+.hero{
+grid-template-columns:1fr;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.hero-left h1{
+font-size:38px;
+}
+
+.page{
+padding:20px;
+}
+
+}
+
+/* ---------- EMERGENCY MODAL ---------- */
+
+#emergencyModal{
+position:fixed;
+inset:0;
+background:rgba(18,0,0,.85);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:99999;
+padding:20px;
+}
+
+.emergency-box{
+background:white;
+border:5px solid #EF4444;
+border-radius:30px;
+padding:30px;
+max-width:420px;
+width:100%;
+text-align:center;
+animation:popup .25s ease;
+}
+
+@keyframes popup{
+from{transform:scale(.85);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+.emergency-box h2{
+font-family:'Merriweather',serif;
+color:#DC2626;
+margin:15px 0;
+font-size:26px;
+}
+
+.stop-btn{
+width:100%;
+padding:15px;
+margin-top:20px;
+border:none;
+border-radius:18px;
+background:#DC2626;
+color:white;
+font-weight:800;
+cursor:pointer;
+}
+
+.flash-warning{
+animation:flash 1s infinite;
+}
+
+@keyframes flash{
+0%,100%{opacity:1;}
+50%{opacity:.45;}
+}
+
+/* ---------- LIVE COUNTDOWN DESIGN ---------- */
+
+.countdown{
+  background:linear-gradient(135deg,#6D4DFF,#8B5CF6,#6366F1);
+  background-size:200% 200%;
+  animation:gradientMove 8s ease infinite;
+  border-radius:28px;
+  padding:24px;
+  color:white;
+  box-shadow:0 18px 40px rgba(109,77,255,.30);
+  position:relative;
+  overflow:hidden;
+}
+
+.countdown::before{
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  top:-70px;
+  right:-60px;
+}
+
+.countdown-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.countdown-header h3{
+  font-family:'Merriweather',serif;
+  font-size:22px;
+  margin-top:6px;
+}
+
+.countdown-header p{
+  color:#ECE8FF;
+  margin-top:8px;
+  font-size:13px;
+}
+
+.pulse-circle{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:rgba(255,255,255,.18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  animation:pulse 2s infinite;
+}
+
+.timer-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:18px 0;
+}
+
+.time-box{
+  background:rgba(255,255,255,.14);
+  border-radius:18px;
+  padding:16px;
+  text-align:center;
+}
+
+.time-box span{
+  display:block;
+  font-size:28px;
+  font-family:'Merriweather',serif;
+  font-weight:800;
+}
+
+.time-box small{
+  letter-spacing:2px;
+  font-size:10px;
+}
+
+.progress-area{
+  margin-top:10px;
+}
+
+.progress-info{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  margin-bottom:8px;
+}
+
+.progress-bar{
+  height:10px;
+  background:rgba(255,255,255,.20);
+  border-radius:999px;
+  overflow:hidden;
+}
+
+#progressFill{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,#34D399,#A7F3D0);
+  transition:width .8s ease;
+}
+
+.countdown-footer{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px;
+}
+
+.footer-chip{
+  background:rgba(255,255,255,.14);
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:11px;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{
+    transform:scale(1.08);
+    box-shadow:0 0 0 15px rgba(255,255,255,0);
+  }
+  100%{transform:scale(1);}
+}
+
+@keyframes gradientMove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+@media(max-width:700px){
+  .timer-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+  
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<div class="top">
+
+<div class="brand">
+<div class="logo">A</div>
+
+<div>
+<h2>ARKOBOMBS</h2>
+<p>Academic Readiness Platform</p>
+</div>
+</div>
+
+<div class="badge">🎓 STUDENT PORTAL</div>
+
+</div>
+
+<!-- ================= PAGE ================= -->
+
+<div class="page">
+
+<div class="label-small">Student Dashboard</div>
+
+<div class="hero">
+
+<div class="hero-left">
+<h1>Stay Ready.<br>Stay Synchronized.</h1>
+
+<p>
+Receive organized announcements from your teachers,
+track quizzes, laboratory exams, presentations,
+coverage, reviewers, deadlines, and emergency updates
+all in one academic readiness platform.
+</p>
+
+</div>
+
+<div class="hero-card">
+
+<small>NEXT ACADEMIC EVENT</small>
+
+<h2 id="heroSubject">Programming 1 Laboratory Exam</h2>
+
+<p id="heroDate">
+    September 30, 2026 • 10:30 AM<br>
+    Computer Laboratory • Bring Student ID & Laptop
+</p>
+</div>
+
+</div>
+
+<!-- ================= STATS ================= -->
+
+<div class="stats">
+
+<div class="stat">
+<span>Unread Announcements</span>
+<h3 id="statUnread">03</h3>
+</div>
+
+<div class="stat">
+<span>Upcoming Events</span>
+<h3 id="statEvents">07</h3>
+</div>
+
+<div class="stat">
+<span>Today's Subjects</span>
+<h3 id="statClasses">04</h3>
+</div>
+
+<div class="stat">
+<span>Emergency Alerts</span>
+<h3 id="statAlerts">00</h3>
+</div>
+
+</div>
+
+<!-- ================= STUDY TODAY ================= -->
+
+<div class="study-widget">
+
+<div class="study-task">
+    <div>
+        <b>Programming 1</b><br>
+        <small>Laboratory Exam • Arrays, Loops, Methods</small>
+    </div>
+    <span style="color:#EF4444;font-weight:700;">Due Tomorrow</span>
+</div>
+
+<div class="study-task">
+    <div>
+        <b>Calculus 1</b><br>
+        <small>Practice Derivatives and Limits</small>
+    </div>
+    <span style="color:#F59E0B;font-weight:700;">1 Hour</span>
+</div>
+
+<div class="study-task">
+    <div>
+        <b>Research</b><br>
+        <small>Finalize Oral Defense PPT</small>
+    </div>
+    <span style="color:#2563EB;font-weight:700;">Priority</span>
+</div>
+
+<div class="study-task">
+    <div>
+        <b>General Chemistry</b><br>
+        <small>Review Lewis Structures Reviewer</small>
+    </div>
+    <span style="color:#10B981;font-weight:700;">Lab Week</span>
+</div>
+
+</div>
+<!-- ================= HOME TAB ================= -->
+<div class="tabs">
+
+<button class="tab active" id="t-home" onclick="switchTab('home')">
+🏠 Home
+</button>
+
+<button class="tab" id="t-announcements" onclick="switchTab('announcements')">
+📢 Announcements
+</button>
+
+<button class="tab" id="t-subjects" onclick="switchTab('subjects')">
+📚 My Subjects
+</button>
+
+<button class="tab" id="t-updates" onclick="switchTab('updates')">
+📅 Schedule Updates
+</button>
+
+<button class="tab" id="t-history" onclick="switchTab('history')">
+🕘 History
+</button>
+
+<button class="tab" id="t-alerts" onclick="switchTab('alerts')">
+🚨 Emergency Alerts
+</button>
+
+</div>
+<div id="tab-home">
+
+<div class="grid">
+
+<div>
+
+<div class="card">
+
+<div class="card-label">Latest Announcement</div>
+
+<div class="card-title">
+Programming 1 Laboratory Examination
+</div>
+
+<div class="card-desc">
+Your teacher posted a new laboratory examination announcement.
+</div>
+
+<div id="latestAnnouncement"></div>
+
+</div>
+
+<div class="card">
+
+<div class="card-label">Recent Announcements</div>
+
+<div class="announcement">
+
+    <div class="subject-tag">Programming 1</div>
+
+    <h4>Programming 1 Laboratory Examination</h4>
+
+    <p>
+        Coverage: Variables, Operators, Conditional Statements, Loops,
+        Arrays, and Methods.
+    </p>
+
+    <div class="meta">
+        <span>📍 Computer Laboratory</span>
+        <span>🪪 Bring Student ID</span>
+        <span>💻 Laptop Required</span>
+        <span>📅 September 30 • 10:30 AM</span>
+    </div>
+
+    <button class="read-btn">
+        Open Details
+    </button>
+
+</div>
+
+<div class="announcement">
+
+<div class="subject-tag">Calculus 1</div>
+
+<h4>Quiz Rescheduled</h4>
+
+<p>
+Quiz moved from September 28 to September 30 at 10:30 AM.
+</p>
+
+<div class="meta">
+<span>📍 Room 304</span>
+<span>🧮 Calculator Allowed</span>
+</div>
+
+<button class="read-btn">
+✓ Mark as Read
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="countdown">
+
+  <div class="countdown-header">
+
+    <div>
+      <small>NEXT ACADEMIC EVENT</small>
+      <h3 id="nextSubject">Programming 1 Laboratory Examination</h3>
+
+      <p id="nextDateText">September 30, 2026 • 10:30 AM</p>
+    </div>
+
+    <div class="pulse-circle">
+      ⏰
+    </div>
+
+  </div>
+
+  <div class="timer-grid">
+
+    <div class="time-box">
+      <span id="days">00</span>
+      <small>DAYS</small>
+    </div>
+
+    <div class="time-box">
+      <span id="hours">00</span>
+      <small>HOURS</small>
+    </div>
+
+    <div class="time-box">
+      <span id="minutes">00</span>
+      <small>MINUTES</small>
+    </div>
+
+    <div class="time-box">
+      <span id="seconds">00</span>
+      <small>SECONDS</small>
+    </div>
+
+  </div>
+
+  <div class="progress-area">
+
+    <div class="progress-info">
+      <span>Preparation Progress</span>
+      <span id="progressPercent">0%</span>
+    </div>
+
+    <div class="progress-bar">
+      <div id="progressFill"></div>
+    </div>
+
+  </div>
+
+  <div class="countdown-footer">
+    <div class="footer-chip">📍 Computer Laboratory</div>
+    <div class="footer-chip">🪪 Bring Student ID</div>
+    <div class="footer-chip">💻 Laptop Required</div>
+  </div>
+
+</div>
+
+<div class="card">
+
+<div class="card-label">Today's Schedule</div>
+
+<div class="timeline-item">
+
+<div class="timeline-dot"></div>
+
+<div>
+<b>Programming 1</b><br>
+<small>8:00 AM • Computer Laboratory</small>
+</div>
+
+</div>
+
+<div class="timeline-item">
+
+<div class="timeline-dot"></div>
+
+<div>
+<b>Calculus 1</b><br>
+<small>10:30 AM • Room 304</small>
+</div>
+
+</div>
+
+<div class="timeline-item">
+
+<div class="timeline-dot"></div>
+
+<div>
+<b>Research</b><br>
+<small>1:00 PM • Research Room</small>
+</div>
+
+</div>
+
+<div class="timeline-item">
+
+<div class="timeline-dot"></div>
+
+<div>
+<b>General Chemistry</b><br>
+<small>3:00 PM • Chemistry Laboratory</small>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- MESSAGE 1 ENDS HERE -->
+<!-- ===================================================== -->
+<!-- =============== ANNOUNCEMENTS TAB ==================== -->
+<!-- ===================================================== -->
+
+<div id="tab-announcements" class="hidden">
+
+    <div class="card">
+
+        <div class="card-label">Announcement Feed</div>
+        <div class="card-title">Latest Academic Announcements</div>
+
+        <div class="card-desc">
+            All announcements created by your teachers will automatically appear here.
+            Students can see coverage, requirements, schedule, and location.
+        </div>
+
+        <div id="announcementContainer">
+
+            <!-- Programming -->
+
+            <div class="announcement">
+
+                <div class="subject-tag">Programming 1</div>
+
+                <h4>Laboratory Examination</h4>
+
+                <p>
+                    Programming 1 Laboratory Examination has been scheduled on
+                    <b>September 30 — 10:30 AM.</b>
+                </p>
+
+                <div class="meta">
+                    <span>📍 Computer Laboratory</span>
+                    <span>📅 Sept. 30</span>
+                    <span>🪪 Bring Student ID</span>
+                </div>
+
+                <button class="read-btn">✓ Mark as Read</button>
+
+            </div>
+
+            <!-- Calculus -->
+
+            <div class="announcement">
+
+                <div class="subject-tag">Calculus 1</div>
+
+                <h4>Quiz Rescheduled</h4>
+
+                <p>
+                    Calculus Quiz moved to September 30 because of academic schedule changes.
+                </p>
+
+                <div class="meta">
+                    <span>📍 Room 304</span>
+                    <span>🧮 Calculator Allowed</span>
+                    <span>⏰ 10:30 AM</span>
+                </div>
+
+                <button class="read-btn">✓ Mark as Read</button>
+
+            </div>
+
+            <!-- Research -->
+
+            <div class="announcement">
+
+                <div class="subject-tag">Research</div>
+
+                <h4>Research Defense Schedule</h4>
+
+                <p>
+                    Prepare Chapter 2, Review of Related Literature,
+                    Conceptual Framework, and Methodology.
+                </p>
+
+                <div class="meta">
+                    <span>🎤 Oral Defense</span>
+                    <span>📄 Bring Printed Questionnaire</span>
+                </div>
+
+                <button class="read-btn">✓ Mark as Read</button>
+
+            </div>
+
+            <!-- Chemistry -->
+
+            <div class="announcement">
+
+                <div class="subject-tag">General Chemistry</div>
+
+                <h4>Chemistry Laboratory Activity</h4>
+
+                <p>
+                    Laboratory Activity covering Chemical Bonding and Lewis Structures.
+                </p>
+
+                <div class="meta">
+                    <span>🥼 Laboratory Uniform</span>
+                    <span>🧪 Lewis Structure</span>
+                </div>
+
+                <button class="read-btn">✓ Mark as Read</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- =================== SUBJECTS TAB ====================== -->
+<!-- ===================================================== -->
+
+<div id="tab-subjects" class="hidden">
+
+
+
+    <!-- SUBJECTS HEADER -->
+    <div class="card subject-header">
+
+        <div class="card-label">Student Learning Space</div>
+
+        <div class="card-title">
+            📚 My Subjects
+        </div>
+
+        <div class="card-desc">
+            View lesson coverage, teacher notes, reviewers, quizzes, activities, and your study checklist in one place.
+        </div>
+
+    </div>
+
+    <!-- SUBJECT CARDS -->
+    <div class="subject-grid">
+
+        <!-- Programming -->
+        <div class="subject-card"
+             style="background:linear-gradient(135deg,#8B5CF6,#6366F1);">
+
+            <small>IT11B • COMPUTER PROGRAMMING</small>
+
+            <h3>Programming 1</h3>
+
+            <p>Laboratory Exam • Sept. 30</p>
+
+            <div class="coverage">
+                <span>Variables</span>
+                <span>Loops</span>
+                <span>Arrays</span>
+                <span>Methods</span>
+            </div>
+
+        </div>
+
+        <!-- Calculus -->
+        <div class="subject-card"
+             style="background:linear-gradient(135deg,#EC4899,#A855F7);">
+
+            <small>IT11B • MATHEMATICS</small>
+
+            <h3>Calculus 1</h3>
+
+            <p>Quiz • Sept. 30</p>
+
+            <div class="coverage">
+                <span>Functions</span>
+                <span>Limits</span>
+                <span>Derivatives</span>
+            </div>
+
+        </div>
+
+        <!-- Chemistry -->
+        <div class="subject-card"
+             style="background:linear-gradient(135deg,#10B981,#059669);">
+
+            <small>IT11B • SCIENCE</small>
+
+            <h3>General Chemistry</h3>
+
+            <p>Laboratory • Oct. 2</p>
+
+            <div class="coverage">
+                <span>Ionic Bond</span>
+                <span>Covalent Bond</span>
+                <span>Lewis Structure</span>
+            </div>
+
+        </div>
+
+        <!-- Research -->
+        <div class="subject-card"
+             style="background:linear-gradient(135deg,#2563EB,#1D4ED8);">
+
+            <small>IT11B • RESEARCH</small>
+
+            <h3>Research</h3>
+
+            <p>Defense Week</p>
+
+            <div class="coverage">
+                <span>RRL</span>
+                <span>Methodology</span>
+                <span>Questionnaire</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- KEEP EVERYTHING BELOW -->
+
+    <div class="card">
+
+        <div class="card-label">Subject Notes</div>
+
+        <div class="card-title">
+            Programming 1 Study Hub
+        </div>
+
+        <div class="card-desc">
+            Everything your teacher uploaded for Programming 1 appears here.
+        </div>
+
+        <h3 style="margin-bottom:12px;color:#4C1D95;">
+            📖 Coverage / Topics to Study
+        </h3>
+
+        <div class="meta">
+            <span>Variables</span>
+            <span>Operators</span>
+            <span>If Statements</span>
+            <span>Loops</span>
+            <span>Arrays</span>
+            <span>Methods</span>
+        </div>
+
+        <br>
+
+        <h3 style="margin-bottom:12px;color:#4C1D95;">
+            📝 Teacher Notes
+        </h3>
+
+        <div class="study-widget">
+
+            <div class="study-task">
+                Bring your Student ID and laptop.
+            </div>
+
+            <div class="study-task">
+                Focus on nested loops and one-dimensional arrays.
+            </div>
+
+            <div class="study-task">
+                Practice writing methods without copying examples.
+            </div>
+
+        </div>
+
+        <h3 style="margin-bottom:12px;color:#4C1D95;">
+            ✅ Study Checklist
+        </h3>
+
+        <div class="study-widget">
+
+            <div class="study-task">
+                <label>
+                    <input type="checkbox">
+                    Review Variables
+                </label>
+            </div>
+
+            <div class="study-task">
+                <label>
+                    <input type="checkbox">
+                    Practice Loops
+                </label>
+            </div>
+
+            <div class="study-task">
+                <label>
+                    <input type="checkbox">
+                    Solve Array Exercises
+                </label>
+            </div>
+
+            <div class="study-task">
+                <label>
+                    <input type="checkbox">
+                    Read Laboratory Instructions
+                </label>
+            </div>
+
+        </div>
+
+        <h3 style="margin-bottom:12px;color:#4C1D95;">
+            📂 Study Materials
+        </h3>
+
+        <div class="announcement">
+
+            <h4>📄 Programming 1 Reviewer</h4>
+
+            <p>
+                PDF uploaded by teacher containing Variables,
+                Arrays, Loops, and Methods.
+            </p>
+
+            <button class="read-btn">
+                Open Reviewer
+            </button>
+
+        </div>
+
+        <div class="announcement">
+
+            <h4>🎥 Java Loops Video Tutorial</h4>
+
+            <p>
+                Watch this before laboratory examination.
+            </p>
+
+            <button class="read-btn">
+                Watch Lesson
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ============================================== -->
+    <!-- CALCULUS STUDY HUB -->
+    <!-- ============================================== -->
+
+    <div class="card">
+
+        <div class="card-label">Subject Notes</div>
+
+        <div class="card-title">
+            Calculus 1 Reviewer
+        </div>
+
+        <div class="card-desc">
+            Coverage uploaded by your teacher for the next quiz.
+        </div>
+
+        <div class="meta">
+            <span>Functions</span>
+            <span>Limits</span>
+            <span>Continuity</span>
+            <span>Derivatives</span>
+        </div>
+
+        <br>
+
+        <h3 style="color:#DB2777;margin-bottom:12px;">
+            📝 Important Notes
+        </h3>
+
+        <div class="study-widget">
+
+            <div class="study-task">
+                Memorize derivative formulas.
+            </div>
+
+            <div class="study-task">
+                Practice quotient and product rule.
+            </div>
+
+            <div class="study-task">
+                Bring scientific calculator.
+            </div>
+
+        </div>
+
+        <h3 style="color:#DB2777;margin-bottom:12px;">
+            ✅ Checklist
+        </h3>
+
+        <div class="study-widget">
+
+            <div class="study-task">
+                <label>
+                    <input type="checkbox">
+                    Solve Practice Set A
+                </label>
+            </div>
+
+            <div class="study-task">
+                <label>
+                    <input type="checkbox">
+                    Solve Practice Set B
+                </label>
+            </div>
+
+            <div class="study-task">
+                <label>
+                    <input type="checkbox">
+                    Memorize Basic Formulas
+                </label>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ============================================== -->
+    <!-- CHEMISTRY STUDY HUB -->
+    <!-- ============================================== -->
+
+    <div class="card">
+
+        <div class="card-label">Subject Notes</div>
+
+        <div class="card-title">
+            General Chemistry Reviewer
+        </div>
+
+        <div class="card-desc">
+            Chemistry notes synchronized from teacher announcements.
+        </div>
+
+        <div class="meta">
+            <span>Chemical Bonding</span>
+            <span>Lewis Structure</span>
+            <span>VSEPR Theory</span>
+            <span>Molecular Geometry</span>
+        </div>
+
+        <br>
+
+        <div class="study-widget">
+
+            <div class="study-task">
+                Review Lewis Structures of molecules.
+            </div>
+
+            <div class="study-task">
+                Practice drawing molecular geometry.
+            </div>
+
+            <div class="study-task">
+                Bring laboratory notebook.
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ============================================== -->
+    <!-- RESEARCH STUDY HUB -->
+    <!-- ============================================== -->
+
+    <div class="card">
+
+        <div class="card-label">Research Notes</div>
+
+        <div class="card-title">
+            Research Defense Preparation
+        </div>
+
+        <div class="card-desc">
+            Teacher reminders and reviewers before oral defense.
+        </div>
+
+        <div class="meta">
+            <span>Chapter 2</span>
+            <span>RRL</span>
+            <span>Research Gap</span>
+            <span>Methodology</span>
+            <span>Questionnaire</span>
+        </div>
+
+        <br>
+
+        <h3 style="margin-bottom:12px;color:#2563EB;">
+            🎤 Defense Checklist
+        </h3>
+
+        <div class="study-widget">
+
+            <div class="study-task">
+                <label>
+                    <input type="checkbox">
+                    Finalize PowerPoint
+                </label>
+            </div>
+
+            <div class="study-task">
+                <label>
+                    <input type="checkbox">
+                    Practice Introduction Script
+                </label>
+            </div>
+
+            <div class="study-task">
+                <label>
+                    <input type="checkbox">
+                    Print Questionnaire
+                </label>
+            </div>
+
+            <div class="study-task">
+                <label>
+                    <input type="checkbox">
+                    Memorize Research Objectives
+                </label>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- =========== MESSAGE 2 ENDS HERE ====================== -->
+<!-- ===================================================== -->
+ <!-- ===================================================== -->
+<!-- ================= SCHEDULE UPDATES TAB =============== -->
+<!-- ===================================================== -->
+
+<div id="tab-updates" class="hidden">
+
+    <div class="card">
+
+        <div class="card-label">Academic Calendar</div>
+        <div class="card-title">Upcoming Events & Schedule Updates</div>
+
+        <div class="card-desc">
+            Any schedule changes made by your teacher will automatically appear here.
+        </div>
+
+        <!-- Calendar Summary -->
+
+        <div class="study-widget">
+
+            <div class="study-task">
+                <div>
+                    <b>🟣 Programming 1 Laboratory Exam</b><br>
+                    <small>September 30 • 10:30 AM • Computer Laboratory</small>
+                </div>
+                <span style="color:#EF4444;font-weight:700;">Tomorrow</span>
+            </div>
+
+            <div class="study-task">
+                <div>
+                    <b>🩷 Calculus 1 Quiz</b><br>
+                    <small>September 30 • Room 304</small>
+                </div>
+                <span style="color:#F59E0B;font-weight:700;">Rescheduled</span>
+            </div>
+
+            <div class="study-task">
+                <div>
+                    <b>🟢 Chemistry Laboratory</b><br>
+                    <small>October 2 • Chemistry Laboratory</small>
+                </div>
+                <span style="color:#10B981;font-weight:700;">Upcoming</span>
+            </div>
+
+            <div class="study-task">
+                <div>
+                    <b>🔵 Research Defense</b><br>
+                    <small>October 4 • AVR Room</small>
+                </div>
+                <span style="color:#2563EB;font-weight:700;">Prepare PPT</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Monthly Calendar -->
+
+    <div class="card">
+
+        <div class="card-label">Monthly Calendar</div>
+        <div class="card-title">September Academic Calendar</div>
+
+        <div class="card-desc">
+            Color-coded academic activities from your teachers.
+        </div>
+
+        <table style="width:100%;border-collapse:separate;border-spacing:10px;text-align:center;font-size:13px">
+
+            <tr style="color:#7C5CFF;font-weight:700">
+                <td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td style="background:#EEE8FF;padding:14px;border-radius:16px;">24</td>
+                <td style="background:#EEE8FF;padding:14px;border-radius:16px;">25</td>
+                <td style="background:#EEE8FF;padding:14px;border-radius:16px;">26</td>
+            </tr>
+
+            <tr>
+                <td style="background:#F5F3FF;padding:14px;border-radius:16px;">29</td>
+
+                <td style="background:#DDD6FE;padding:14px;border-radius:16px;">
+                    <b>30</b><br>
+                    <small>🟣 Lab Exam</small>
+                </td>
+
+                <td>1</td>
+
+                <td style="background:#DCFCE7;padding:14px;border-radius:16px;">
+                    <b>2</b><br>
+                    <small>🟢 Chemistry</small>
+                </td>
+
+                <td style="background:#DBEAFE;padding:14px;border-radius:16px;">
+                    <b>3</b><br>
+                    <small>🔵 Defense</small>
+                </td>
+            </tr>
+
+        </table>
+
+        <div class="meta" style="margin-top:20px">
+            <span>🟣 Programming</span>
+            <span>🩷 Calculus</span>
+            <span>🟢 Chemistry</span>
+            <span>🔵 Research</span>
+            <span>🔴 Emergency</span>
+        </div>
+
+    </div>
+
+    <!-- Upcoming Deadlines -->
+
+    <div class="card">
+
+        <div class="card-label">Deadline Tracker</div>
+        <div class="card-title">Upcoming Deadlines</div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+                <b>Programming 1 Laboratory Exam</b><br>
+                <small>Tomorrow • Computer Laboratory</small>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+                <b>Calculus Quiz</b><br>
+                <small>Tomorrow • Room 304</small>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+                <b>Chemistry Laboratory Activity</b><br>
+                <small>October 2</small>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+                <b>Research Defense</b><br>
+                <small>October 4</small>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- ================= HISTORY TAB ======================== -->
+<!-- ===================================================== -->
+
+<div id="tab-history" class="hidden">
+
+    <!-- Academic Timeline -->
+    ...historyContainer...
+
+    <!-- Lesson History -->
+    ...lesson announcements...
+
+    <!-- Notification Center -->
+    ...study-widget notifications...
+
+
+<!-- ===================================================== -->
+<!-- ================= EMERGENCY TAB ====================== -->
+<!-- ===================================================== -->
+
+</div>
+<div id="tab-alerts" class="hidden">
+    
+
+    <div class="card">
+
+        <div class="card-label">Campus Safety Center</div>
+
+        <div class="card-title">🚨 Emergency Alerts</div>
+
+        <div class="card-desc">
+            High-priority announcements from your teachers and school administration.
+        </div>
+
+        <div class="announcement" style="border:2px solid #EF4444;background:#FFF5F5;">
+
+            <div class="subject-tag" style="background:#FEE2E2;color:#B91C1C;">
+                HIGH PRIORITY
+            </div>
+
+            <h4 style="color:#B91C1C;">
+                Class Suspension Due to Heavy Rain
+            </h4>
+
+            <p>
+                All afternoon classes are suspended today because of continuous heavy rainfall.
+            </p>
+
+            <div class="meta">
+                <span>🌧️ Weather Advisory</span>
+                <span>📅 Sept. 27</span>
+                <span>🏫 IT11B</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+    <div class="card">
+
+        <div class="card-label">Academic Timeline</div>
+        <div class="card-title">History of Events & Lessons</div>
+
+        <div class="card-desc">
+            Every lesson, announcement, update, and emergency notification you've received appears here.
+        </div>
+
+        <div id="historyContainer">
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div>
+                    <b>Programming 1 Laboratory Exam Posted</b><br>
+                    <small>September 27 • 8:45 AM</small>
+
+                    <p style="margin-top:6px;color:#706986">
+                        Teacher created a Programming Laboratory Examination announcement.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div>
+                    <b>Calculus Quiz Rescheduled</b><br>
+                    <small>September 26 • 4:30 PM</small>
+
+                    <p style="margin-top:6px;color:#706986">
+                        Quiz moved from September 28 to September 30 because of schedule adjustments.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div>
+                    <b>New Programming Lesson Uploaded</b><br>
+                    <small>September 25 • 9:00 AM</small>
+
+                    <div class="meta">
+                        <span>Variables</span>
+                        <span>Loops</span>
+                        <span>Arrays</span>
+                        <span>Methods</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div>
+                    <b>General Chemistry Notes Uploaded</b><br>
+                    <small>September 23 • 11:20 AM</small>
+
+                    <p style="margin-top:6px;color:#706986">
+                        Lewis Structure reviewer uploaded by your teacher.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div>
+                    <b>Research Defense Announcement</b><br>
+                    <small>September 22 • 2:10 PM</small>
+
+                    <p style="margin-top:6px;color:#706986">
+                        Defense schedule and checklist published.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Lesson History -->
+
+    <div class="card">
+
+        <div class="card-label">Lesson History</div>
+        <div class="card-title">Previous Lessons & Review Topics</div>
+
+        <div class="card-desc">
+            Use this section to review previously discussed lessons before quizzes.
+        </div>
+
+        <div class="announcement">
+
+            <div class="subject-tag">Programming 1</div>
+
+            <h4>Lesson 1 — Introduction to Java</h4>
+
+            <p>History of Java, JVM, JDK, JRE, Compilation Process.</p>
+
+            <div class="meta">
+                <span>📖 Reviewed</span>
+                <span>September 10</span>
+            </div>
+
+        </div>
+
+        <div class="announcement">
+
+            <div class="subject-tag">Programming 1</div>
+
+            <h4>Lesson 2 — Variables & Data Types</h4>
+
+            <p>Primitive Data Types, Variable Declaration, Constants.</p>
+
+            <div class="meta">
+                <span>📖 Reviewed</span>
+                <span>September 13</span>
+            </div>
+
+        </div>
+
+        <div class="announcement">
+
+            <div class="subject-tag">Programming 1</div>
+
+            <h4>Lesson 3 — Conditional Statements</h4>
+
+            <p>If, Else If, Switch Statements.</p>
+
+            <div class="meta">
+                <span>📖 Reviewed</span>
+                <span>September 16</span>
+            </div>
+
+        </div>
+
+        <div class="announcement">
+
+            <div class="subject-tag">Programming 1</div>
+
+            <h4>Lesson 4 — Loops</h4>
+
+            <p>For Loop, While Loop, Do While Loop, Nested Loops.</p>
+
+            <div class="meta">
+                <span>📖 Review Before Exam</span>
+            </div>
+
+        </div>
+
+        <div class="announcement">
+
+            <div class="subject-tag">Programming 1</div>
+
+            <h4>Lesson 5 — Arrays</h4>
+
+            <p>One-Dimensional Arrays, Traversal, User Input.</p>
+
+            <div class="meta">
+                <span>⭐ Included in Laboratory Exam</span>
+            </div>
+
+        </div>
+
+        <div class="announcement">
+
+            <div class="subject-tag">Calculus 1</div>
+
+            <h4>Lesson History</h4>
+
+            <p>Functions → Limits → Continuity → Derivatives.</p>
+
+            <div class="meta">
+                <span>Quiz Coverage</span>
+            </div>
+
+        </div>
+
+        <div class="announcement">
+
+            <div class="subject-tag">General Chemistry</div>
+
+            <h4>Lesson History</h4>
+
+            <p>Atoms → Periodic Table → Ionic Bond → Covalent Bond → Lewis Structure.</p>
+
+            <div class="meta">
+                <span>Laboratory Coverage</span>
+            </div>
+
+        </div>
+
+        <div class="announcement">
+
+            <div class="subject-tag">Research</div>
+
+            <h4>Lesson History</h4>
+
+            <p>Research Problem → SOP → RRL → Conceptual Framework → Methodology.</p>
+
+            <div class="meta">
+                <span>Defense Coverage</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Notification Center -->
+
+    <div class="card">
+
+        <div class="card-label">Notification Center</div>
+        <div class="card-title">Recent Notifications</div>
+
+        <div class="card-desc">
+            All academic notifications received by your account.
+        </div>
+
+        <div class="study-widget">
+
+            <div class="study-task">
+                <div>
+                    <b>🔔 Programming Laboratory Exam</b><br>
+                    <small>15 minutes ago</small>
+                </div>
+
+                <span style="color:#10B981;font-weight:700;">NEW</span>
+            </div>
+
+            <div class="study-task">
+                <div>
+                    <b>📅 Calculus Quiz Updated</b><br>
+                    <small>Yesterday</small>
+                </div>
+
+                <span style="color:#F59E0B;font-weight:700;">UPDATED</span>
+            </div>
+
+            <div class="study-task">
+                <div>
+                    <b>📚 New Chemistry Reviewer Uploaded</b><br>
+                    <small>Yesterday</small>
+                </div>
+
+                <span style="color:#2563EB;font-weight:700;">MATERIAL</span>
+            </div>
+
+           <div class="study-task">
+    <div>
+        <b>Research Defense Reminder</b><br>
+        <small>2 days ago</small>
+    </div>
+
+    <span style="color:#EC4899;font-weight:700;">REMINDER</span>
+</div>
+
+<div class="study-task">
+    <div>
+        <b>🚨 Heavy Rain Emergency Alert</b><br>
+        <small>3 days ago</small>
+    </div>
+
+    <span style="color:#EF4444;font-weight:700;">URGENT</span>
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+<div id="emergencyModal">
+
+    <div class="emergency-box">
+
+        <div style="font-size:60px;" class="flash-warning">🚨</div>
+
+        <h2>EMERGENCY ALERT</h2>
+
+        <p id="emergencyText">
+            Heavy rain detected.
+            Afternoon classes are suspended.
+        </p>
+
+        <button class="stop-btn" onclick="closeEmergency()">
+            I UNDERSTAND
+        </button>
+
+    </div>
+
+</div>
+
+    <script>// ================= EMERGENCY ALERT =================
+
+function showEmergency(message){
+    document.getElementById("emergencyText").textContent = message;
+    document.getElementById("emergencyModal").style.display = "flex";
+}
+
+function closeEmergency(){
+    document.getElementById("emergencyModal").style.display = "none";
+}
+
+// Demo
+// showEmergency("Classes are suspended due to heavy rain.");
+
+// ================= TAB NAVIGATION =================
+const tabs = [
+  "home",
+  "announcements",
+  "subjects",
+  "updates",
+  "history",
+  "alerts"
+];
+
+function switchTab(tabName){
+
+  tabs.forEach(tab => {
+    document.getElementById("tab-"+tab).classList.add("hidden");
+    document.getElementById("t-"+tab).classList.remove("active");
+  });
+
+  document.getElementById("tab-"+tabName).classList.remove("hidden");
+  document.getElementById("t-"+tabName).classList.add("active");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+// Open Home first.
+switchTab("home");
+// DEMO EMERGENCY ALERT
+showEmergency("⚠️ Heavy Rain Advisory: Afternoon classes are suspended today due to continuous heavy rainfall.");
+
+// ================= LIVE COUNTDOWN =================
+
+const eventDate = new Date(2026, 8, 30, 10, 30, 0).getTime();
+const createdDate = new Date(2026, 8, 23, 8, 0, 0).getTime();
+
+function updateCountdown(){
+
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+
+    if(distance <= 0){
+        document.getElementById("days").textContent="00";
+        document.getElementById("hours").textContent="00";
+        document.getElementById("minutes").textContent="00";
+        document.getElementById("seconds").textContent="00";
+        document.getElementById("nextSubject").textContent="🎉 Event Started!";
+        document.getElementById("progressFill").style.width="100%";
+        document.getElementById("progressPercent").textContent="100%";
+        return;
+    }
+
+    const days=Math.floor(distance/(1000*60*60*24));
+    const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+    const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+    const seconds=Math.floor((distance%(1000*60))/1000);
+
+    document.getElementById("days").textContent=String(days).padStart(2,'0');
+    document.getElementById("hours").textContent=String(hours).padStart(2,'0');
+    document.getElementById("minutes").textContent=String(minutes).padStart(2,'0');
+    document.getElementById("seconds").textContent=String(seconds).padStart(2,'0');
+
+    const total=eventDate-createdDate;
+    const passed=now-createdDate;
+    const progress=Math.min(Math.max((passed/total)*100,0),100);
+
+    document.getElementById("progressFill").style.width=progress+"%";
+    document.getElementById("progressPercent").textContent=Math.round(progress)+"%";
+}
+
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase.js"></script>
+
+<script src="js/student.js"></script>
+</body>
+</html>

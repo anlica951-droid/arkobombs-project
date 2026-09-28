@@ -1,0 +1,2423 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ARKOBOMBS • Teacher Portal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #7C5CFF;
+    --secondary: #6366F1;
+    --pink: #EC4899;
+    --blue: #2563EB;
+    --green: #10B981;
+    --orange: #F59E0B;
+    --red: #EF4444;
+
+    --bg: #F8F6FF;
+    --white: #FFFFFF;
+    --text: #281B52;
+    --muted: #817995;
+    --border: #ECE8FF;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 78px;
+
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid rgba(124, 92, 255, 0.10);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 30px;
+
+    z-index: 1000;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.logo {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 15px;
+
+    background: linear-gradient(
+        135deg,
+        #A855F7,
+        #6366F1
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    font-size: 19px;
+    font-weight: 900;
+
+    box-shadow:
+        0 12px 25px rgba(124, 92, 255, 0.30);
+}
+
+.brand h2 {
+    font-size: 18px;
+    font-weight: 800;
+    color: #281B52;
+}
+
+.brand p {
+    margin-top: 2px;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.teacher-chip {
+    padding: 10px 18px;
+
+    border-radius: 999px;
+
+    background: #F0EBFF;
+    color: var(--primary);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    position: fixed;
+
+    top: 78px;
+    left: 0;
+
+    width: 245px;
+    height: calc(100vh - 78px);
+
+    background: rgba(255,255,255,0.84);
+    backdrop-filter: blur(20px);
+
+    border-right: 1px solid var(--border);
+
+    padding: 25px 18px;
+
+    overflow-y: auto;
+
+    z-index: 900;
+}
+
+.teacher-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding-bottom: 25px;
+    margin-bottom: 24px;
+
+    border-bottom: 1px solid #F0ECFF;
+}
+
+.teacher-avatar {
+    width: 50px;
+    height: 50px;
+
+    flex-shrink: 0;
+
+    border-radius: 17px;
+
+    background: linear-gradient(
+        135deg,
+        #8B5CF6,
+        #6366F1
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+.teacher-profile h3 {
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.teacher-profile p {
+    margin-top: 3px;
+
+    font-size: 10px;
+    line-height: 1.4;
+
+    color: var(--muted);
+}
+
+.nav-title {
+    margin-bottom: 12px;
+
+    color: #A09AB8;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nav-btn {
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    color: #625A79;
+
+    padding: 12px 14px;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.nav-btn .nav-icon {
+    width: 24px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.nav-btn:hover {
+    background: #F5F1FF;
+    color: var(--primary);
+    transform: translateX(2px);
+}
+
+.nav-btn.active {
+    background: linear-gradient(
+        135deg,
+        #7C5CFF,
+        #6366F1
+    );
+
+    color: white;
+
+    box-shadow:
+        0 10px 22px rgba(124,92,255,0.23);
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main {
+    margin-left: 245px;
+    margin-top: 78px;
+
+    padding: 35px;
+
+    min-height: calc(100vh - 78px);
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    display: grid;
+
+    grid-template-columns: 1.45fr 0.85fr;
+
+    gap: 25px;
+
+    margin-bottom: 30px;
+}
+
+.hero-left {
+    padding: 12px 5px;
+}
+
+.label {
+    margin-bottom: 12px;
+
+    color: var(--primary);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.hero-left h1 {
+    max-width: 720px;
+
+    color: #24184E;
+
+    font-family: 'Merriweather', serif;
+
+    font-size: 45px;
+    line-height: 1.16;
+}
+
+.hero-left p {
+    max-width: 650px;
+
+    margin-top: 17px;
+
+    color: #706886;
+
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   HERO RIGHT
+========================================================= */
+
+.hero-right {
+    min-height: 230px;
+
+    padding: 30px;
+
+    border-radius: 30px;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(255,255,255,0.18),
+            transparent 40%
+        ),
+        linear-gradient(
+            135deg,
+            #8B5CF6,
+            #6366F1
+        );
+
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    box-shadow:
+        0 22px 40px rgba(124,92,255,0.22);
+}
+
+.hero-right small {
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.75;
+
+    font-weight: 800;
+}
+
+.hero-right h2 {
+    margin: 12px 0 8px;
+
+    font-family: 'Merriweather', serif;
+
+    font-size: 30px;
+}
+
+.hero-right p {
+    font-size: 13px;
+
+    opacity: 0.92;
+}
+
+.class-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    width: fit-content;
+
+    margin-top: 18px;
+
+    padding: 7px 11px;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,0.14);
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #86EFAC;
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    position: relative;
+
+    min-height: 145px;
+
+    padding: 22px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 23px;
+
+    box-shadow:
+        0 12px 30px rgba(124,92,255,0.06);
+
+    overflow: hidden;
+
+    transition: 0.25s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 18px 35px rgba(124,92,255,0.10);
+}
+
+.stat-card::after {
+    content: "";
+
+    position: absolute;
+
+    right: -20px;
+    bottom: -30px;
+
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+
+    opacity: 0.35;
+}
+
+.stat-card.purple {
+    border-left: 5px solid var(--primary);
+    background: linear-gradient(
+        180deg,
+        #F6F2FF,
+        #FFFFFF
+    );
+}
+
+.stat-card.pink {
+    border-left: 5px solid var(--pink);
+    background: linear-gradient(
+        180deg,
+        #FFF1F8,
+        #FFFFFF
+    );
+}
+
+.stat-card.blue {
+    border-left: 5px solid var(--blue);
+    background: linear-gradient(
+        180deg,
+        #EFF7FF,
+        #FFFFFF
+    );
+}
+
+.stat-card.red {
+    border-left: 5px solid var(--red);
+    background: linear-gradient(
+        180deg,
+        #FFF3F3,
+        #FFFFFF
+    );
+}
+
+.stat-icon {
+    font-size: 19px;
+
+    margin-bottom: 9px;
+}
+
+.stat-card small {
+    display: block;
+
+    color: #857D9F;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+.stat-card h3 {
+    margin-top: 7px;
+
+    font-family: 'Merriweather', serif;
+
+    font-size: 34px;
+}
+
+.stat-card.purple h3 {
+    color: var(--primary);
+}
+
+.stat-card.pink h3 {
+    color: var(--pink);
+}
+
+.stat-card.blue h3 {
+    color: var(--blue);
+}
+
+.stat-card.red h3 {
+    color: var(--red);
+}
+
+.stat-card p {
+    margin-top: 3px;
+
+    color: #77708C;
+
+    font-size: 11px;
+}
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.section-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 16px;
+}
+
+.section-header h2 {
+    font-family: 'Merriweather', serif;
+
+    font-size: 24px;
+
+    color: #2A2051;
+}
+
+.section-header p {
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quick-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 30px;
+}
+
+.quick-card {
+    position: relative;
+
+    min-height: 180px;
+
+    padding: 24px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 23px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px rgba(124,92,255,0.05);
+
+    transition: 0.25s ease;
+}
+
+.quick-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 18px 35px rgba(124,92,255,0.11);
+}
+
+.quick-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+}
+
+.quick-card.purple::before {
+    background: var(--primary);
+}
+
+.quick-card.pink::before {
+    background: var(--pink);
+}
+
+.quick-card.blue::before {
+    background: var(--blue);
+}
+
+.quick-card.red::before {
+    background: var(--red);
+}
+
+.quick-icon {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+
+    margin-bottom: 15px;
+}
+
+.quick-card.purple .quick-icon {
+    background: #F0EAFF;
+}
+
+.quick-card.pink .quick-icon {
+    background: #FFEAF5;
+}
+
+.quick-card.blue .quick-icon {
+    background: #EAF4FF;
+}
+
+.quick-card.red .quick-icon {
+    background: #FFEAEA;
+}
+
+.quick-card h4 {
+    color: #2C2351;
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.quick-card p {
+    margin-top: 8px;
+
+    color: #77708D;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+/* =========================================================
+   ACTIVITY CARD
+========================================================= */
+
+.card {
+    padding: 25px;
+
+    background: rgba(255,255,255,0.88);
+
+    border: 1px solid var(--border);
+
+    border-radius: 27px;
+
+    box-shadow:
+        0 12px 30px rgba(124,92,255,0.05);
+}
+
+.card-label {
+    margin-bottom: 7px;
+
+    color: #A09AB8;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.card-title {
+    margin-bottom: 14px;
+
+    font-family: 'Merriweather', serif;
+
+    font-size: 23px;
+
+    color: #2A2051;
+}
+
+.activity {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid #F1EEFF;
+}
+
+.activity:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 43px;
+    height: 43px;
+
+    flex-shrink: 0;
+
+    border-radius: 14px;
+
+    background: #F0EBFF;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+.activity b {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 12px;
+
+    color: #312750;
+}
+
+.activity small {
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+/* =========================================================
+   OTHER PAGES
+========================================================= */
+
+.content-page {
+    max-width: 1100px;
+}
+
+.page-heading {
+    margin-bottom: 25px;
+}
+
+.page-heading .label {
+    margin-bottom: 8px;
+}
+
+.page-heading h1 {
+    font-family: 'Merriweather', serif;
+
+    font-size: 35px;
+
+    color: #281B52;
+}
+
+.page-heading p {
+    margin-top: 8px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-card {
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 27px;
+
+    padding: 28px;
+
+    box-shadow:
+        0 12px 30px rgba(124,92,255,0.05);
+}
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-size: 11px;
+
+    font-weight: 800;
+
+    color: #51486C;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    border: 1px solid #E7E1FA;
+
+    border-radius: 13px;
+
+    padding: 12px 14px;
+
+    background: #FBFAFF;
+
+    color: #302650;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 12px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(124,92,255,0.10);
+}
+
+.form-group textarea {
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+.primary-btn {
+    margin-top: 22px;
+
+    border: none;
+
+    padding: 13px 20px;
+
+    border-radius: 13px;
+
+    background: linear-gradient(
+        135deg,
+        #7C5CFF,
+        #6366F1
+    );
+
+    color: white;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 22px rgba(124,92,255,0.22);
+
+    transition: 0.2s;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* =========================================================
+   EMPTY / SIMPLE CARDS
+========================================================= */
+
+.simple-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.simple-card {
+    padding: 25px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 22px;
+}
+
+.simple-card .big-icon {
+    font-size: 27px;
+
+    margin-bottom: 13px;
+}
+
+.simple-card h3 {
+    font-size: 15px;
+}
+
+.simple-card p {
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    padding: 14px 18px;
+
+    border-radius: 14px;
+
+    background: #281B52;
+
+    color: white;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    box-shadow:
+        0 15px 35px rgba(40,27,82,0.25);
+
+    transform: translateY(100px);
+
+    opacity: 0;
+
+    transition: 0.3s;
+
+    z-index: 2000;
+}
+
+.toast.show {
+    transform: translateY(0);
+
+    opacity: 1;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1150px) {
+
+    .stats,
+    .quick-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 850px) {
+
+    .sidebar {
+        width: 78px;
+
+        padding: 18px 10px;
+    }
+
+    .teacher-profile {
+        justify-content: center;
+    }
+
+    .teacher-profile > div:last-child {
+        display: none;
+    }
+
+    .nav-title {
+        text-align: center;
+    }
+
+    .nav-btn {
+        justify-content: center;
+        padding: 12px 8px;
+    }
+
+    .nav-btn span {
+        display: none;
+    }
+
+    .main {
+        margin-left: 78px;
+
+        padding: 25px;
+    }
+
+    .brand p {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .topbar {
+        padding: 0 15px;
+    }
+
+    .teacher-chip {
+        padding: 8px 11px;
+
+        font-size: 9px;
+    }
+
+    .main {
+        padding: 20px 15px;
+    }
+
+    .hero-left h1 {
+        font-size: 31px;
+    }
+
+    .stats,
+    .quick-grid,
+    .form-grid,
+    .simple-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-right {
+        min-height: 190px;
+    }
+
+    .section-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 5px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     TOP BAR
+========================================================= -->
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <div class="logo">A</div>
+
+        <div>
+            <h2>ARKOBOMBS</h2>
+            <p>Academic Announcement & Readiness Platform</p>
+        </div>
+
+    </div>
+
+    <div class="teacher-chip">
+        👩‍🏫 TEACHER PORTAL
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside class="sidebar">
+
+    <div class="teacher-profile">
+
+        <div class="teacher-avatar">
+            👩‍🏫
+        </div>
+
+        <div>
+            <h3>Professor Maria Santos</h3>
+            <p>BSIT Department • IT11B Adviser</p>
+        </div>
+
+    </div>
+
+
+    <div class="nav-title">
+        Navigation
+    </div>
+
+
+    <div class="nav-menu">
+
+        <button class="nav-btn active" data-page="dashboard">
+            <span class="nav-icon">⌂</span>
+            <span>Dashboard</span>
+        </button>
+
+        <button class="nav-btn" data-page="announcement">
+            <span class="nav-icon">📢</span>
+            <span>Create Announcement</span>
+        </button>
+
+        <button class="nav-btn" data-page="classes">
+            <span class="nav-icon">👥</span>
+            <span>My Classes</span>
+        </button>
+
+        <button class="nav-btn" data-page="materials">
+            <span class="nav-icon">📂</span>
+            <span>Study Materials</span>
+        </button>
+
+        <button class="nav-btn" data-page="schedule">
+            <span class="nav-icon">🗓️</span>
+            <span>Schedule Manager</span>
+        </button>
+
+        <button class="nav-btn" data-page="history">
+            <span class="nav-icon">🕘</span>
+            <span>History</span>
+        </button>
+
+        <button class="nav-btn" data-page="emergency">
+            <span class="nav-icon">🚨</span>
+            <span>Emergency Center</span>
+        </button>
+
+        <button class="nav-btn" data-page="settings">
+            <span class="nav-icon">⚙️</span>
+            <span>Settings</span>
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="main">
+
+
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
+<section id="dashboard" class="page active">
+
+    <div class="hero">
+
+        <div class="hero-left">
+
+            <div class="label">
+                Teacher Command Center
+            </div>
+
+            <h1>
+                Manage Your Classes in One Place.
+            </h1>
+
+            <p>
+                Publish announcements, upload reviewers, organize quizzes,
+                reschedule events, and keep students synchronized through
+                one academic readiness platform.
+            </p>
+
+        </div>
+
+
+        <div class="hero-right">
+
+            <small>ACTIVE CLASS</small>
+
+            <h2>IT11B • BSIT</h2>
+
+            <p>
+                42 Students • 4 Subjects Today
+            </p>
+
+            <div class="class-status">
+                <span class="status-dot"></span>
+                Class is active
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="stat-card purple">
+
+            <div class="stat-icon">📢</div>
+
+            <small>
+                Announcements Published
+            </small>
+
+            <h3>24</h3>
+
+            <p>
+                This semester
+            </p>
+
+        </div>
+
+
+        <div class="stat-card pink">
+
+            <div class="stat-icon">👥</div>
+
+            <small>
+                Active Classes
+            </small>
+
+            <h3>06</h3>
+
+            <p>
+                Currently managed
+            </p>
+
+        </div>
+
+
+        <div class="stat-card blue">
+
+            <div class="stat-icon">🗓️</div>
+
+            <small>
+                Upcoming Events
+            </small>
+
+            <h3>08</h3>
+
+            <p>
+                Next 7 days
+            </p>
+
+        </div>
+
+
+        <div class="stat-card red">
+
+            <div class="stat-icon">🚨</div>
+
+            <small>
+                Emergency Alerts
+            </small>
+
+            <h3>01</h3>
+
+            <p>
+                Sent this month
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+
+    <div class="section-header">
+
+        <div>
+            <h2>Quick Actions</h2>
+            <p>Common teacher tasks</p>
+        </div>
+
+    </div>
+
+
+    <div class="quick-grid">
+
+        <div class="quick-card purple"
+             onclick="openPage('announcement')">
+
+            <div class="quick-icon">
+                📢
+            </div>
+
+            <h4>
+                Create Announcement
+            </h4>
+
+            <p>
+                Create quizzes, exams, reminders,
+                laboratory activities and presentations.
+            </p>
+
+        </div>
+
+
+        <div class="quick-card pink"
+             onclick="openPage('materials')">
+
+            <div class="quick-icon">
+                📂
+            </div>
+
+            <h4>
+                Upload Reviewer
+            </h4>
+
+            <p>
+                Upload PDF reviewers, lecture notes,
+                PowerPoints and learning materials.
+            </p>
+
+        </div>
+
+
+        <div class="quick-card blue"
+             onclick="openPage('schedule')">
+
+            <div class="quick-icon">
+                🗓️
+            </div>
+
+            <h4>
+                Reschedule Event
+            </h4>
+
+            <p>
+                Manage upcoming exams, quizzes and
+                other academic events.
+            </p>
+
+        </div>
+
+
+        <div class="quick-card red"
+             onclick="openPage('emergency')">
+
+            <div class="quick-icon">
+                🚨
+            </div>
+
+            <h4>
+                Emergency Broadcast
+            </h4>
+
+            <p>
+                Send urgent academic or school
+                announcements to students.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACTIVITY -->
+
+    <div class="card">
+
+        <div class="card-label">
+            Today's Overview
+        </div>
+
+        <div class="card-title">
+            Recent Teacher Activity
+        </div>
+
+
+        <div class="activity">
+
+            <div class="activity-icon">
+                📢
+            </div>
+
+            <div>
+                <b>
+                    Programming Laboratory Examination Published
+                </b>
+
+                <small>
+                    15 minutes ago • IT11B students synchronized.
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="activity">
+
+            <div class="activity-icon">
+                📂
+            </div>
+
+            <div>
+                <b>
+                    Java Arrays Reviewer Uploaded
+                </b>
+
+                <small>
+                    Today • Programming 1
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="activity">
+
+            <div class="activity-icon">
+                🗓️
+            </div>
+
+            <div>
+                <b>
+                    Calculus Quiz Rescheduled
+                </b>
+
+                <small>
+                    Yesterday • Students automatically updated.
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="activity">
+
+            <div class="activity-icon">
+                🚨
+            </div>
+
+            <div>
+                <b>
+                    Heavy Rain Emergency Alert Sent
+                </b>
+
+                <small>
+                    Yesterday • All BSIT students notified.
+                </small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CREATE ANNOUNCEMENT
+========================================================= -->
+
+<section id="announcement" class="page">
+
+    <div class="content-page">
+
+        <div class="page-heading">
+
+            <div class="label">
+                Teacher Tools
+            </div>
+
+            <h1>
+                Create Announcement
+            </h1>
+
+            <p>
+                Turn an academic announcement into an organized student event.
+            </p>
+
+        </div>
+
+
+        <div class="form-card">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Subject</label>
+
+                    <select id="subject">
+                        <option>Programming 1</option>
+                        <option>Calculus 1</option>
+                        <option>ITE6101</option>
+                        <option>Computer Programming</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Event Type</label>
+
+                    <select id="eventType">
+                        <option>Quiz</option>
+                        <option>Laboratory Exam</option>
+                        <option>Written Exam</option>
+                        <option>Presentation</option>
+                        <option>Assignment</option>
+                        <option>Reminder</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Event Title</label>
+
+                    <input
+                        type="text"
+                        id="eventTitle"
+                        placeholder="Example: Programming 1 Laboratory Exam"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Class / Section</label>
+
+                    <input
+                        type="text"
+                        id="section"
+                        placeholder="Example: IT11B"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Date</label>
+
+                    <input
+                        type="date"
+                        id="eventDate"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Time</label>
+
+                    <input
+                        type="time"
+                        id="eventTime"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Location</label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="Example: Computer Laboratory"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Requirements</label>
+
+                    <input
+                        type="text"
+                        id="requirements"
+                        placeholder="Example: School ID, Exam Permit"
+                    >
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        Coverage / Topics
+                    </label>
+
+                    <textarea
+                        id="coverage"
+                        placeholder="Example: Variables, conditionals, loops, methods and arrays."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                onclick="publishAnnouncement()"
+            >
+                ✓ Organize & Publish Announcement
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CLASSES
+========================================================= -->
+
+<section id="classes" class="page">
+
+    <div class="content-page">
+
+        <div class="page-heading">
+
+            <div class="label">
+                Academic Management
+            </div>
+
+            <h1>
+                My Classes
+            </h1>
+
+            <p>
+                Classes currently managed through ARKOBOMBS.
+            </p>
+
+        </div>
+
+
+        <div class="simple-grid">
+
+            <div class="simple-card">
+                <div class="big-icon">👥</div>
+                <h3>IT11B • BSIT</h3>
+                <p>42 students • Active</p>
+            </div>
+
+            <div class="simple-card">
+                <div class="big-icon">👥</div>
+                <h3>IT11A • BSIT</h3>
+                <p>38 students • Active</p>
+            </div>
+
+            <div class="simple-card">
+                <div class="big-icon">👥</div>
+                <h3>IT12A • BSIT</h3>
+                <p>35 students • Active</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     MATERIALS
+========================================================= -->
+
+<section id="materials" class="page">
+
+    <div class="content-page">
+
+        <div class="page-heading">
+
+            <div class="label">
+                Learning Resources
+            </div>
+
+            <h1>
+                Study Materials
+            </h1>
+
+            <p>
+                Manage reviewers and learning materials for your students.
+            </p>
+
+        </div>
+
+
+        <div class="simple-grid">
+
+            <div class="simple-card">
+                <div class="big-icon">📄</div>
+                <h3>Java Arrays Reviewer</h3>
+                <p>Programming 1 • PDF Reviewer</p>
+            </div>
+
+            <div class="simple-card">
+                <div class="big-icon">📊</div>
+                <h3>Calculus Notes</h3>
+                <p>Calculus 1 • Lecture Notes</p>
+            </div>
+
+            <div class="simple-card">
+                <div class="big-icon">💻</div>
+                <h3>Programming Exercises</h3>
+                <p>Programming 1 • Practice Material</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SCHEDULE
+========================================================= -->
+
+<section id="schedule" class="page">
+
+    <div class="content-page">
+
+        <div class="page-heading">
+
+            <div class="label">
+                Academic Calendar
+            </div>
+
+            <h1>
+                Schedule Manager
+            </h1>
+
+            <p>
+                View and manage upcoming academic events.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-title">
+                Upcoming Events
+            </div>
+
+
+            <div class="activity">
+
+                <div class="activity-icon">
+                    💻
+                </div>
+
+                <div>
+                    <b>
+                        Programming 1 Laboratory Exam
+                    </b>
+
+                    <small>
+                        September 30 • 1:00 PM • Computer Laboratory
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="activity">
+
+                <div class="activity-icon">
+                    📐
+                </div>
+
+                <div>
+                    <b>
+                        Calculus 1 Quiz
+                    </b>
+
+                    <small>
+                        October 5 • 10:30 AM • Building Annex, Room 113A
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="activity">
+
+                <div class="activity-icon">
+                    📢
+                </div>
+
+                <div>
+                    <b>
+                        ITE6101 Presentation
+                    </b>
+
+                    <small>
+                        October 8 • 9:00 AM • Room 204
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HISTORY
+========================================================= -->
+
+<section id="history" class="page">
+
+    <div class="content-page">
+
+        <div class="page-heading">
+
+            <div class="label">
+                Records
+            </div>
+
+            <h1>
+                Announcement History
+            </h1>
+
+            <p>
+                Previously published academic announcements.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="activity">
+                <div class="activity-icon">📢</div>
+
+                <div>
+                    <b>Programming Laboratory Examination</b>
+                    <small>Published • IT11B</small>
+                </div>
+            </div>
+
+
+            <div class="activity">
+                <div class="activity-icon">📢</div>
+
+                <div>
+                    <b>Calculus 1 Quiz</b>
+                    <small>Published • IT11B</small>
+                </div>
+            </div>
+
+
+            <div class="activity">
+                <div class="activity-icon">📢</div>
+
+                <div>
+                    <b>Java Arrays Activity</b>
+                    <small>Published • IT11B</small>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     EMERGENCY
+========================================================= -->
+
+<section id="emergency" class="page">
+
+    <div class="content-page">
+
+        <div class="page-heading">
+
+            <div class="label">
+                Priority Communication
+            </div>
+
+            <h1>
+                Emergency Center
+            </h1>
+
+            <p>
+                Send urgent school or academic announcements.
+            </p>
+
+        </div>
+
+
+        <div class="form-card">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Alert Type</label>
+
+                    <select id="alertType">
+                        <option>Class Suspension</option>
+                        <option>Heavy Rain</option>
+                        <option>Typhoon</option>
+                        <option>Earthquake</option>
+                        <option>Important School Notice</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Target Class</label>
+
+                    <select>
+                        <option>IT11B • BSIT</option>
+                        <option>IT11A • BSIT</option>
+                        <option>All BSIT Students</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        Emergency Message
+                    </label>
+
+                    <textarea
+                        id="alertMessage"
+                        placeholder="Write the urgent message here..."
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                onclick="sendEmergency()"
+            >
+                🚨 Send Emergency Alert
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     SETTINGS
+========================================================= -->
+
+<section id="settings" class="page">
+
+    <div class="content-page">
+
+        <div class="page-heading">
+
+            <div class="label">
+                Account
+            </div>
+
+            <h1>
+                Settings
+            </h1>
+
+            <p>
+                Teacher portal preferences.
+            </p>
+
+        </div>
+
+
+        <div class="form-card">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Teacher Name</label>
+
+                    <input
+                        type="text"
+                        value="Professor Maria Santos"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Department</label>
+
+                    <input
+                        type="text"
+                        value="BSIT Department"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Default Section</label>
+
+                    <input
+                        type="text"
+                        value="IT11B"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Notification Status</label>
+
+                    <select>
+                        <option>Enabled</option>
+                        <option>Disabled</option>
+                    </select>
+                </div>
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                onclick="showToast('Settings saved successfully.')"
+            >
+                Save Settings
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div id="toast" class="toast">
+    Announcement published successfully.
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
+const navButtons =
+    document.querySelectorAll('.nav-btn');
+
+const pages =
+    document.querySelectorAll('.page');
+
+
+function openPage(pageName) {
+
+    pages.forEach(page => {
+        page.classList.remove('active');
+    });
+
+    navButtons.forEach(button => {
+        button.classList.remove('active');
+    });
+
+    const target =
+        document.getElementById(pageName);
+
+    if (target) {
+        target.classList.add('active');
+    }
+
+    const activeButton =
+        document.querySelector(
+            `.nav-btn[data-page="${pageName}"]`
+        );
+
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+
+navButtons.forEach(button => {
+
+    button.addEventListener('click', () => {
+
+        const pageName =
+            button.dataset.page;
+
+        openPage(pageName);
+
+    });
+
+});
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById('toast');
+
+    toast.textContent = message;
+
+    toast.classList.add('show');
+
+    setTimeout(() => {
+
+        toast.classList.remove('show');
+
+    }, 3000);
+}
+
+
+/* =========================================================
+   PUBLISH ANNOUNCEMENT
+========================================================= */
+
+function publishAnnouncement() {
+
+    const subject =
+        document.getElementById('subject').value;
+
+    const eventType =
+        document.getElementById('eventType').value;
+
+    const title =
+        document.getElementById('eventTitle').value.trim();
+
+    const section =
+        document.getElementById('section').value.trim();
+
+    const date =
+        document.getElementById('eventDate').value;
+
+    const time =
+        document.getElementById('eventTime').value;
+
+    const location =
+        document.getElementById('location').value.trim();
+
+    const requirements =
+        document.getElementById('requirements').value.trim();
+
+    const coverage =
+        document.getElementById('coverage').value.trim();
+
+
+    if (
+        !title ||
+        !section ||
+        !date ||
+        !time ||
+        !location
+    ) {
+
+        showToast(
+            'Please complete the required fields.'
+        );
+
+        return;
+    }
+
+
+    const announcement = {
+
+        id: Date.now(),
+
+        subject: subject,
+
+        eventType: eventType,
+
+        title: title,
+
+        section: section,
+
+        date: date,
+
+        time: time,
+
+        location: location,
+
+        requirements: requirements,
+
+        coverage: coverage,
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    let announcements =
+        JSON.parse(
+            localStorage.getItem(
+                'arkobombsAnnouncements'
+            )
+        ) || [];
+
+
+    announcements.push(announcement);
+
+
+    localStorage.setItem(
+        'arkobombsAnnouncements',
+        JSON.stringify(announcements)
+    );
+
+
+    showToast(
+        '✓ Announcement organized and published.'
+    );
+
+
+    document.getElementById('eventTitle').value = '';
+    document.getElementById('section').value = '';
+    document.getElementById('eventDate').value = '';
+    document.getElementById('eventTime').value = '';
+    document.getElementById('location').value = '';
+    document.getElementById('requirements').value = '';
+    document.getElementById('coverage').value = '';
+
+}
+
+
+/* =========================================================
+   EMERGENCY ALERT
+========================================================= */
+
+function sendEmergency() {
+
+    const type =
+        document.getElementById('alertType').value;
+
+    const message =
+        document.getElementById('alertMessage').value.trim();
+
+
+    if (!message) {
+
+        showToast(
+            'Please enter an emergency message.'
+        );
+
+        return;
+    }
+
+
+    const alert = {
+
+        id: Date.now(),
+
+        type: type,
+
+        message: message,
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    let alerts =
+        JSON.parse(
+            localStorage.getItem(
+                'arkobombsEmergencyAlerts'
+            )
+        ) || [];
+
+
+    alerts.push(alert);
+
+
+    localStorage.setItem(
+        'arkobombsEmergencyAlerts',
+        JSON.stringify(alerts)
+    );
+
+
+    document.getElementById(
+        'alertMessage'
+    ).value = '';
+
+
+    showToast(
+        '🚨 Emergency alert recorded.'
+    );
+
+}
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase.js"></script>
+
+<script src="js/teacher.js"></script>
+</body>
+</html>
+```
