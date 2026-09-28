@@ -289,30 +289,16 @@ teacherRole.onclick = () => {
     studentRole.classList.remove("active");
 };
 
+// ===== FAKE LOGIN FOR CODEFEST =====
 document.getElementById("loginBtn").onclick = () => {
 
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
+    // Save selected role (optional, useful later)
+    localStorage.setItem("arkobombsRole", selectedRole);
 
-    if(email === "" || password === ""){
-        alert("Please enter your email and password.");
-        return;
-    }
-
-    if(selectedRole === "student"){
-        if(email === "student@arkobombs.edu" && password === "Student2026"){
-            window.location.href = "students.html";
-        }else{
-            alert("Invalid Student Account.");
-        }
-    }
-
-    if(selectedRole === "teacher"){
-        if(email === "teacher@arkobombs.edu" && password === "Teacher2026"){
-            window.location.href = "Teacher Enhanced.html";
-        }else{
-            alert("Invalid Teacher/Admin Account.");
-        }
+    if (selectedRole === "teacher") {
+        window.location.href = "Teacher Enhanced.html";
+    } else {
+        window.location.href = "students.html";
     }
 };
 </script>
