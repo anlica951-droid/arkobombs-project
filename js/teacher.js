@@ -536,3 +536,34 @@ function toast(message) {
   }, 2500);
 
 }
+function renderSchedule(){
+
+    const container = document.getElementById("scheduleList");
+    if(!container) return;
+
+    const announcements =
+        JSON.parse(localStorage.getItem("arkobombsAnnouncements")) || [];
+
+    container.innerHTML = "";
+
+    announcements.forEach(item=>{
+
+        container.innerHTML += `
+            <div class="activity">
+                <div class="activity-icon">🗓️</div>
+
+                <div>
+                    <b>${item.title}</b>
+                    <small>
+                        ${item.date} • ${item.time}
+                    </small><br>
+                    <small>
+                        ${item.location}
+                    </small>
+                </div>
+            </div>
+        `;
+
+    });
+
+}

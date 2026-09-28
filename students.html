@@ -2108,9 +2108,87 @@ function updateCountdown(){
     document.getElementById("progressFill").style.width=progress+"%";
     document.getElementById("progressPercent").textContent=Math.round(progress)+"%";
 }
+/* ===== LOAD TEACHER ANNOUNCEMENTS ===== */
 
+function loadStudentPortal(){
+
+   const announcements =
+    JSON.parse(localStorage.getItem("teacherAnnouncements")) || [];
+
+    // Update stats
+    document.getElementById("statUnread").textContent = announcements.length;
+    document.getElementById("statEvents").textContent = announcements.length;
+
+    // Home latest announcement
+    const latestBox = document.getElementById("latestAnnouncement");
+
+    if(announcements.length > 0){
+
+        const latest = announcements[announcements.length - 1];
+
+        latestBox.innerHTML = `
+            <div class="announcement">
+                <div class="subject-tag">${latest.subject}</div>
+
+                <h4>${latest.title}</h4>
+
+                <p>${latest.coverage || ""}</p>
+
+                <div class="meta">
+                    <span>📍 ${latest.location || "TBA"}</span>
+                    <span>📅 ${latest.date || ""}</span>
+                    <span>⏰ ${latest.time || ""}</span>
+                </div>
+
+                <button class="read-btn">Open Details</button>
+            </div>
+        `;
+
+        // Hero card
+        document.getElementById("heroSubject").textContent = latest.title;
+        document.getElementById("heroDate").innerHTML =
+            `${latest.date} • ${latest.time}<br>${latest.location}`;
+
+        // Countdown title
+        document.getElementById("nextSubject").textContent = latest.title;
+        document.getElementById("nextDateText").textContent =
+            `${latest.date} • ${latest.time}`;
+    }
+
+    // Announcement page
+    const container = document.getElementById("announcementContainer");
+
+    if(container){
+        container.innerHTML = "";
+
+        announcements.slice().reverse().forEach(item => {
+            container.innerHTML += `
+                <div class="announcement">
+
+                    <div class="subject-tag">${item.subject}</div>
+
+                    <h4>${item.title}</h4>
+
+                    <p>${item.coverage || ""}</p>
+
+                    <div class="meta">
+                        <span>📍 ${item.location || "TBA"}</span>
+                        <span>📅 ${item.date || ""}</span>
+                        <span>⏰ ${item.time || ""}</span>
+                    </div>
+
+                    <button class="read-btn">Open Details</button>
+
+                </div>
+            `;
+        });
+    }
+}
+
+window.addEventListener("storage", loadStudentPortal);
 updateCountdown();
 setInterval(updateCountdown,1000);
+loadStudentPortal();
 
 </script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

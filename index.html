@@ -1,429 +1,772 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ARKOBOMBS | Sign In</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <title>ARKOBOMBS | Academic Announcement & Readiness Platform</title>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-body{
-    font-family:"DM Sans",sans-serif;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:30px;
-    overflow:hidden;
-
-    background:
-        radial-gradient(circle at top left,#F6C5E8,transparent 35%),
-        radial-gradient(circle at bottom right,#D8C5FF,transparent 35%),
-        linear-gradient(135deg,#FCE8F7,#F6F0FF,#EAF3FF);
-}
-
-/* Floating background blobs */
-
-.blob{
-    position:absolute;
-    border-radius:50%;
-    filter:blur(10px);
-    opacity:.45;
-}
-
-.blob.one{
-    width:260px;
-    height:260px;
-    background:#E879F9;
-    top:-80px;
-    left:-60px;
-}
-
-.blob.two{
-    width:320px;
-    height:320px;
-    background:#A78BFA;
-    bottom:-120px;
-    right:-80px;
-}
-
-.blob.three{
-    width:180px;
-    height:180px;
-    background:#C4B5FD;
-    top:120px;
-    right:120px;
-}
-
-.login-card{
-    position:relative;
-    z-index:2;
-
-    width:100%;
-    max-width:470px;
-
-    padding:42px;
-
-    border-radius:34px;
-
-    background:rgba(255,255,255,.78);
-    backdrop-filter:blur(22px);
-
-    border:1px solid rgba(255,255,255,.85);
-
-    box-shadow:0 30px 70px rgba(94,61,170,.18);
-}
-
-/* Logo */
-
-.logo{
-    width:76px;
-    height:76px;
-    margin:auto;
-
-    border-radius:24px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    color:white;
-    font-size:34px;
-    font-weight:800;
-
-    background:linear-gradient(135deg,#A855F7,#6366F1);
-
-    box-shadow:0 18px 35px rgba(124,92,255,.28);
-}
-
-.brand{
-    text-align:center;
-    margin-top:18px;
-}
-
-.brand h1{
-    font-family:"Playfair Display",serif;
-    color:#5627B5;
-    font-size:44px;
-    letter-spacing:-1px;
-}
-
-.brand p{
-    margin-top:8px;
-    color:#74688F;
-    font-size:13px;
-    line-height:1.6;
-}
-
-/* Google Button */
-
-.google-btn{
-    width:100%;
-    margin-top:32px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:14px;
-
-    padding:15px 18px;
-
-    border-radius:18px;
-    border:1.5px solid #ECE6FF;
-
-    background:white;
-
-    cursor:pointer;
-
-    transition:.25s;
-}
-
-.google-btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 15px 28px rgba(124,92,255,.12);
-}
-
-.google-icon{
-    width:26px;
-    height:26px;
-    border-radius:50%;
-    background:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:800;
-    font-size:18px;
-    color:#4285F4;
-}
-
-.google-btn span{
-    font-weight:700;
-    color:#43326E;
-}
-
-/* Divider */
-
-.divider{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    margin:28px 0;
-}
-
-.divider hr{
-    flex:1;
-    border:none;
-    border-top:1px solid #ECE7FB;
-}
-
-.divider span{
-    color:#A59CBF;
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:1px;
-}
-
-/* Input */
-
-label{
-    font-size:12px;
-    font-weight:700;
-    color:#5C4B86;
-}
-
-.input{
-    width:100%;
-    margin-top:8px;
-
-    padding:15px 18px;
-
-    border-radius:16px;
-    border:1.5px solid #E8E2FA;
-
-    background:#FCFBFF;
-
-    font-size:14px;
-    color:#2E2353;
-    outline:none;
-
-    transition:.25s;
-}
-
-.input:focus{
-    border-color:#8B5CF6;
-    box-shadow:0 0 0 4px rgba(139,92,246,.12);
-}
-
-/* Sign In Button */
-
-.login-btn{
-    width:100%;
-    margin-top:24px;
-
-    border:none;
-
-    padding:16px;
-
-    border-radius:18px;
-
-    background:linear-gradient(135deg,#A855F7,#6366F1);
-
-    color:white;
-
-    font-size:15px;
-    font-weight:800;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-    box-shadow:0 15px 28px rgba(124,92,255,.22);
-}
-
-.login-btn:hover{
-    transform:translateY(-3px);
-}
-
-.note{
-    margin-top:18px;
-    text-align:center;
-    font-size:11px;
-    color:#887E9F;
-    line-height:1.6;
-}
-
-/* Loading Overlay */
-
-.loading{
-    position:fixed;
-    inset:0;
-
-    background:rgba(248,246,255,.95);
-
-    display:none;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-
-    z-index:999;
-}
-
-.spinner{
-    width:70px;
-    height:70px;
-
-    border-radius:50%;
-
-    border:6px solid #E8DEFF;
-    border-top:6px solid #7C5CFF;
-
-    animation:spin .9s linear infinite;
-}
-
-.loading h2{
-    margin-top:25px;
-    color:#592BC0;
-    font-family:"Playfair Display",serif;
-    font-size:28px;
-}
-
-.loading p{
-    margin-top:8px;
-    color:#74698E;
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-/* Back */
-
-.back{
-    display:inline-block;
-    margin-top:28px;
-    text-decoration:none;
-    color:#7658C5;
-    font-weight:700;
-    font-size:13px;
-}
-</style>
-</head>
-<body>
-
-<div class="blob one"></div>
-<div class="blob two"></div>
-<div class="blob three"></div>
-
-<div class="login-card">
-
-    <div class="logo">A</div>
-
-    <div class="brand">
-        <h1>ARKOBOMBS</h1>
-        <p>
-            Academic Announcement & Readiness Platform
-            <br>
-            Sign in to continue to your dashboard.
-        </p>
-    </div>
-
-    <button class="google-btn" onclick="googleFill()">
-        <div class="google-icon">G</div>
-        <span>Continue with Google</span>
-    </button>
-
-    <div class="divider">
-        <hr><span>OR</span><hr>
-    </div>
-
-    <label>Email Address</label>
-    <input
-        type="email"
-        id="email"
-        class="input"
-        placeholder="Enter your Google email..."
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet"
     >
 
-    <button class="login-btn" onclick="loginPortal()">
-        Sign In →
-    </button>
+    <link rel="stylesheet" href="css/style.css">
 
-    <div class="note">
-        Demo login for CODEFEST 2026.
-        <br>
-        Teacher and Student dashboards use different email accounts.
-    </div>
+</head>
 
-    <a href="index.html" class="back">← Back to Homepage</a>
+<body>
 
-</div>
+    <!-- =========================================
+         BACKGROUND
+    ========================================== -->
 
-<!-- Loading Screen -->
+    <div class="background-shape shape-one"></div>
+    <div class="background-shape shape-two"></div>
+    <div class="background-shape shape-three"></div>
 
-<div class="loading" id="loading">
 
-    <div class="spinner"></div>
+    <!-- =========================================
+         MAIN PAGE CONTAINER
+    ========================================== -->
 
-    <h2>Signing in...</h2>
+    <main class="page-shell">
 
-    <p>Preparing your ARKOBOMBS workspace.</p>
 
-</div>
+        <!-- =====================================
+             NAVIGATION
+        ====================================== -->
 
-<script>
-function googleFill(){
+        <header class="navbar">
 
-    document.getElementById("email").focus();
+            <!-- LOGO -->
 
-}
+            <a href="#home" class="brand">
 
-function loginPortal(){
+                <div class="brand-icon">
+                    A
+                </div>
 
-    const email=document.getElementById("email").value.trim().toLowerCase();
+                <div class="brand-text">
 
-    if(email===""){
-        alert("Please enter your Google email.");
-        return;
-    }
+                    <div class="brand-name">
+                        ARKOBOMBS
+                    </div>
 
-    document.getElementById("loading").style.display="flex";
+                    <div class="brand-subtitle">
+                        Academic Readiness Platform
+                    </div>
 
-    setTimeout(()=>{
+                </div>
 
-        /* ---------- Teacher Accounts ---------- */
+            </a>
 
-        if(
-            email.includes("teacher") ||
-            email.includes("prof") ||
-            email==="teacher@gmail.com" ||
-            email==="teacher@arkobombs.edu"
-        ){
 
-            window.location.href="Teacher%20Enhanced.html";
-            return;
+            <!-- NAVIGATION LINKS -->
 
-        }
+<nav class="nav-menu">
 
-        /* ---------- Student Accounts ---------- */
+    <a href="#about">
+        About
+    </a>
 
-        window.location.href="students.html";
+    <a href="#features">
+        Features
+    </a>
 
-    },1800);
+    <a href="#prototype">
+        Prototype
+    </a>
 
-}
-</script>
+</nav>
+
+        </header>
+
+
+
+        <!-- =====================================
+             HERO
+        ====================================== -->
+
+        <section class="hero" id="home">
+
+            <!-- LEFT SIDE -->
+
+            <div class="hero-left">
+
+                <div class="hero-badge">
+
+                    <span class="badge-star">
+                        ✦
+                    </span>
+
+                    CODEFEST 2026 STARTUP MVP
+
+                </div>
+
+
+                <h1 class="hero-title">
+                    ARKOBOMBS
+                </h1>
+
+
+                <h2 class="hero-subtitle">
+                    Academic Announcement
+                    <br>
+                    &amp; Readiness Platform
+                </h2>
+
+
+                <h3 class="hero-tagline">
+                    From Announcement to Action.
+                </h3>
+
+
+                <p class="hero-description">
+
+                    ARKOBOMBS transforms scattered academic announcements
+                    into organized academic events with countdowns,
+                    requirements, exam coverage, and synchronized
+                    schedule updates.
+
+                </p>
+
+
+                <!-- HERO BUTTONS -->
+
+                <div class="hero-buttons">
+
+                    <a href="login.html" class="primary-button">
+
+                        Sign In
+
+                        <span>
+                            →
+                        </span>
+
+                    </a>
+
+
+                    <a href="#about" class="secondary-button">
+
+                        Learn More
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="hero-right">
+
+
+                <!-- LAPTOP -->
+
+                <div class="laptop-wrapper">
+
+
+                    <div class="laptop-screen">
+
+
+                        <!-- LAPTOP TOP BAR -->
+
+                        <div class="dashboard-topbar">
+
+                            <div class="dashboard-brand">
+
+                                <div class="mini-logo">
+                                    A
+                                </div>
+
+                                <strong>
+                                    ARKOBOMBS
+                                </strong>
+
+                            </div>
+
+
+                            <div class="dashboard-navigation">
+
+                                <span>
+                                    Announcements
+                                </span>
+
+                                <span>
+                                    Schedule
+                                </span>
+
+                                <span>
+                                    Exams
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- DASHBOARD CONTENT -->
+
+                        <div class="dashboard-content">
+
+
+                            <!-- LEFT -->
+
+                            <div class="dashboard-intro">
+
+                                <div class="dashboard-small-title">
+                                    ACADEMIC READINESS PLATFORM
+                                </div>
+
+                                <h3>
+                                    Stay Ready.
+                                    <br>
+                                    Stay Organized.
+                                </h3>
+
+                                <p>
+
+                                    Track academic announcements,
+                                    upcoming exams, requirements,
+                                    and important school events
+                                    in one organized platform.
+
+                                </p>
+
+                                <button>
+                                    Open Dashboard →
+                                </button>
+
+                            </div>
+
+
+
+                            <!-- EVENT CARD -->
+
+                            <div class="dashboard-event">
+
+                                <div class="event-label">
+                                    NEXT ACADEMIC EVENT
+                                </div>
+
+                                <h4>
+                                    Programming 1
+                                    <br>
+                                    Laboratory Exam
+                                </h4>
+
+                                <div class="event-date">
+                                    September 24 • Computer Laboratory
+                                </div>
+
+
+                                <div class="countdown">
+
+                                    <div>
+                                        <strong>05</strong>
+                                        <span>Days</span>
+                                    </div>
+
+                                    <div>
+                                        <strong>12</strong>
+                                        <span>Hours</span>
+                                    </div>
+
+                                    <div>
+                                        <strong>34</strong>
+                                        <span>Minutes</span>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="schedule-update">
+
+                                    <span>
+                                        ✓
+                                    </span>
+
+                                    Schedule Updated
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LAPTOP BASE -->
+
+                    <div class="laptop-base">
+
+                        <div class="laptop-hinge"></div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- FLOATING CARD: TOP -->
+
+                <div class="floating-card update-card">
+
+                    <span class="floating-icon">
+                        📅
+                    </span>
+
+                    <span>
+                        Schedule Updated
+                    </span>
+
+                </div>
+
+
+
+                <!-- FLOATING CARD: BOTTOM -->
+
+                <div class="floating-card ready-card">
+
+                    <span>
+                        ✓
+                    </span>
+
+                    Academic Ready
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             FEATURES
+        ====================================== -->
+
+        <section class="section features-section" id="features">
+
+            <div class="section-heading">
+
+                <span>
+                    FEATURES
+                </span>
+
+                <h2>
+                    Everything Students Need.
+                    <br>
+                    Everything Teachers Manage.
+                </h2>
+
+                <p>
+                    ARKOBOMBS connects academic announcements,
+                    schedules, reminders, and updates in one place.
+                </p>
+
+            </div>
+
+
+            <div class="feature-grid">
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        📢
+                    </div>
+
+                    <h3>
+                        Academic Announcements
+                    </h3>
+
+                    <p>
+                        Teachers can create organized academic
+                        announcements instead of relying on scattered
+                        messages and group chats.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        📅
+                    </div>
+
+                    <h3>
+                        Smart Schedule
+                    </h3>
+
+                    <p>
+                        Important academic events can be organized
+                        into a clear schedule so students know
+                        what is coming next.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        🔔
+                    </div>
+
+                    <h3>
+                        Synchronized Updates
+                    </h3>
+
+                    <p>
+                        Schedule changes and important announcements
+                        can be reflected across the platform.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        ⏱
+                    </div>
+
+                    <h3>
+                        Countdown & Readiness
+                    </h3>
+
+                    <p>
+                        Students can immediately see upcoming
+                        academic events and prepare ahead of time.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        📚
+                    </div>
+
+                    <h3>
+                        Requirements & Coverage
+                    </h3>
+
+                    <p>
+                        Exam coverage, requirements, locations,
+                        and other important details stay attached
+                        to the academic event.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        🚨
+                    </div>
+
+                    <h3>
+                        Important Alerts
+                    </h3>
+
+                    <p>
+                        Important school updates can be highlighted
+                        so students can immediately recognize them.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             ABOUT
+        ====================================== -->
+
+        <section class="section about-section" id="about">
+
+
+            <div class="about-content">
+
+                <span class="section-label">
+                    ABOUT ARKOBOMBS
+                </span>
+
+                <h2>
+                    From Announcement
+                    <br>
+                    to Student Action.
+                </h2>
+
+                <p>
+
+                    Academic information is often scattered across
+                    group chats, classroom announcements, messages,
+                    and manually written notes.
+
+                    <br><br>
+
+                    ARKOBOMBS organizes that information into one
+                    academic readiness platform where teachers can
+                    communicate and students can stay synchronized.
+
+                </p>
+
+
+                <div class="flow">
+
+                    <div class="flow-step">
+
+                        <strong>
+                            01
+                        </strong>
+
+                        <span>
+                            Teacher Announces
+                        </span>
+
+                    </div>
+
+
+                    <div class="flow-line"></div>
+
+
+                    <div class="flow-step">
+
+                        <strong>
+                            02
+                        </strong>
+
+                        <span>
+                            ARKOBOMBS Organizes
+                        </span>
+
+                    </div>
+
+
+                    <div class="flow-line"></div>
+
+
+                    <div class="flow-step">
+
+                        <strong>
+                            03
+                        </strong>
+
+                        <span>
+                            Student Acts
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <div class="about-card-glow"></div>
+
+                <div class="about-card-inner">
+
+                    <div class="about-mini-label">
+                        THE ARKOBOMBS FLOW
+                    </div>
+
+                    <h3>
+                        Teacher announces.
+                    </h3>
+
+                    <h3>
+                        ARKOBOMBS organizes.
+                    </h3>
+
+                    <h3>
+                        Student acts.
+                    </h3>
+
+                    <h3>
+                        Teacher updates.
+                    </h3>
+
+                    <h3>
+                        Student stays synchronized.
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             PROTOTYPE
+        ====================================== -->
+
+        <section class="section prototype-section" id="prototype">
+
+            <div class="section-heading">
+
+                <span>
+                    PROTOTYPE
+                </span>
+
+                <h2>
+                    One Platform.
+                    <br>
+                    Two Academic Roles.
+                </h2>
+
+                <p>
+                    The ARKOBOMBS prototype provides separate
+                    experiences for teachers and students.
+                </p>
+
+            </div>
+
+
+            <div class="prototype-grid">
+
+
+                <div class="prototype-card">
+
+                    <div class="prototype-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Teacher Portal
+                    </h3>
+
+                    <p>
+
+                        Manage announcements, academic events,
+                        schedule changes, requirements, and
+                        important updates.
+
+                    </p>
+
+                    <span>
+                        Teacher Experience →
+                    </span>
+
+                </div>
+
+
+                <div class="prototype-card">
+
+                    <div class="prototype-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Student Portal
+                    </h3>
+
+                    <p>
+
+                        View upcoming academic events,
+                        schedules, reminders, requirements,
+                        and synchronized announcements.
+
+                    </p>
+
+                    <span>
+                        Student Experience →
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="prototype-action">
+
+                <p>
+                    Ready to explore the ARKOBOMBS prototype?
+                </p>
+
+                <a href="login.html" class="launch-button">
+
+                    Sign In to ARKOBOMBS
+
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             FOOTER
+        ====================================== -->
+
+        <footer class="footer">
+
+            <div class="footer-brand">
+
+                <div class="brand-icon">
+                    A
+                </div>
+
+                <div>
+
+                    <strong>
+                        ARKOBOMBS
+                    </strong>
+
+                    <span>
+                        Academic Announcement & Readiness Platform
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <p>
+                CODEFEST 2026 • From Announcement to Action.
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+
+    <script src="js/main.js"></script>
 
 </body>
+
 </html>
