@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ARKOBOMBS | Sign In</title>
+<title>ARKOBOMBS | Login</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -23,87 +22,37 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:30px;
-    overflow:hidden;
-
     background:
-        radial-gradient(circle at top left,#F6C5E8,transparent 35%),
-        radial-gradient(circle at bottom right,#D8C5FF,transparent 35%),
-        linear-gradient(135deg,#FCE8F7,#F6F0FF,#EAF3FF);
-}
-
-/* Floating background blobs */
-
-.blob{
-    position:absolute;
-    border-radius:50%;
-    filter:blur(10px);
-    opacity:.45;
-}
-
-.blob.one{
-    width:260px;
-    height:260px;
-    background:#E879F9;
-    top:-80px;
-    left:-60px;
-}
-
-.blob.two{
-    width:320px;
-    height:320px;
-    background:#A78BFA;
-    bottom:-120px;
-    right:-80px;
-}
-
-.blob.three{
-    width:180px;
-    height:180px;
-    background:#C4B5FD;
-    top:120px;
-    right:120px;
+        radial-gradient(circle at top left,#FAD7E9,transparent 35%),
+        radial-gradient(circle at bottom right,#DDD6FE,transparent 35%),
+        linear-gradient(135deg,#FFF8FD,#F5F1FF,#EEF4FF);
+    padding:25px;
 }
 
 .login-card{
-    position:relative;
-    z-index:2;
-
     width:100%;
-    max-width:470px;
-
-    padding:42px;
-
-    border-radius:34px;
-
-    background:rgba(255,255,255,.78);
+    max-width:430px;
+    background:rgba(255,255,255,.88);
     backdrop-filter:blur(22px);
-
-    border:1px solid rgba(255,255,255,.85);
-
-    box-shadow:0 30px 70px rgba(94,61,170,.18);
+    border:1px solid rgba(255,255,255,.8);
+    border-radius:34px;
+    padding:38px 34px;
+    box-shadow:0 25px 60px rgba(124,92,255,.15);
 }
 
-/* Logo */
-
 .logo{
-    width:76px;
-    height:76px;
-    margin:auto;
-
-    border-radius:24px;
-
+    width:64px;
+    height:64px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#A855F7,#6366F1);
     display:flex;
     justify-content:center;
     align-items:center;
-
     color:white;
-    font-size:34px;
+    font-size:28px;
     font-weight:800;
-
-    background:linear-gradient(135deg,#A855F7,#6366F1);
-
-    box-shadow:0 18px 35px rgba(124,92,255,.28);
+    margin:auto;
+    box-shadow:0 12px 30px rgba(124,92,255,.25);
 }
 
 .brand{
@@ -113,218 +62,159 @@ body{
 
 .brand h1{
     font-family:"Playfair Display",serif;
-    color:#5627B5;
-    font-size:44px;
-    letter-spacing:-1px;
+    color:#5423B2;
+    font-size:36px;
 }
 
 .brand p{
-    margin-top:8px;
-    color:#74688F;
+    margin-top:6px;
+    color:#7B7398;
     font-size:13px;
-    line-height:1.6;
 }
-
-/* Google Button */
-
-.google-btn{
-    width:100%;
-    margin-top:32px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:14px;
-
-    padding:15px 18px;
-
-    border-radius:18px;
-    border:1.5px solid #ECE6FF;
-
-    background:white;
-
-    cursor:pointer;
-
-    transition:.25s;
-}
-
-.google-btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 15px 28px rgba(124,92,255,.12);
-}
-
-.google-icon{
-    width:26px;
-    height:26px;
-    border-radius:50%;
-    background:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:800;
-    font-size:18px;
-    color:#4285F4;
-}
-
-.google-btn span{
-    font-weight:700;
-    color:#43326E;
-}
-
-/* Divider */
 
 .divider{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    margin:28px 0;
+    width:70px;
+    height:4px;
+    background:linear-gradient(90deg,#A855F7,#6366F1);
+    border-radius:20px;
+    margin:24px auto 30px;
 }
-
-.divider hr{
-    flex:1;
-    border:none;
-    border-top:1px solid #ECE7FB;
-}
-
-.divider span{
-    color:#A59CBF;
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:1px;
-}
-
-/* Input */
 
 label{
+    display:block;
+    margin-bottom:8px;
     font-size:12px;
     font-weight:700;
-    color:#5C4B86;
+    color:#564C74;
 }
 
-.input{
+input{
     width:100%;
-    margin-top:8px;
-
-    padding:15px 18px;
-
-    border-radius:16px;
-    border:1.5px solid #E8E2FA;
-
-    background:#FCFBFF;
-
+    padding:15px 16px;
+    border-radius:15px;
+    border:1px solid #E6DEFF;
+    background:#FBFAFF;
     font-size:14px;
-    color:#2E2353;
+    margin-bottom:18px;
     outline:none;
-
-    transition:.25s;
 }
 
-.input:focus{
-    border-color:#8B5CF6;
-    box-shadow:0 0 0 4px rgba(139,92,246,.12);
+input:focus{
+    border-color:#7C5CFF;
+    box-shadow:0 0 0 4px rgba(124,92,255,.12);
 }
 
-/* Sign In Button */
+.role-title{
+    margin:8px 0 14px;
+    font-size:12px;
+    font-weight:700;
+    color:#655B83;
+}
 
-.login-btn{
-    width:100%;
-    margin-top:24px;
+.roles{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-bottom:25px;
+}
 
-    border:none;
-
-    padding:16px;
-
+.role{
+    border:2px solid #ECE8FF;
     border-radius:18px;
-
-    background:linear-gradient(135deg,#A855F7,#6366F1);
-
-    color:white;
-
-    font-size:15px;
-    font-weight:800;
-
+    padding:18px 14px;
+    text-align:center;
     cursor:pointer;
-
     transition:.25s;
-
-    box-shadow:0 15px 28px rgba(124,92,255,.22);
+    background:white;
 }
 
-.login-btn:hover{
+.role:hover{
     transform:translateY(-3px);
 }
 
-.note{
-    margin-top:18px;
-    text-align:center;
+.role.active{
+    border-color:#7C5CFF;
+    background:linear-gradient(135deg,#F5F0FF,#EEE8FF);
+    box-shadow:0 10px 24px rgba(124,92,255,.15);
+}
+
+.role .icon{
+    font-size:30px;
+}
+
+.role h3{
+    margin-top:10px;
+    font-size:14px;
+    color:#5121AD;
+}
+
+.role span{
+    display:block;
+    margin-top:5px;
     font-size:11px;
-    color:#887E9F;
+    color:#7B7398;
+}
+
+button{
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(135deg,#A855F7,#6366F1);
+    color:white;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 12px 25px rgba(124,92,255,.25);
+    transition:.25s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.back{
+    display:block;
+    text-align:center;
+    margin-top:22px;
+    color:#6A45D4;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+}
+
+.demo{
+    margin-top:24px;
+    background:#F7F5FF;
+    border-radius:16px;
+    padding:15px;
+    font-size:12px;
+    color:#655B83;
     line-height:1.6;
 }
 
-/* Loading Overlay */
-
-.loading{
-    position:fixed;
-    inset:0;
-
-    background:rgba(248,246,255,.95);
-
-    display:none;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-
-    z-index:999;
+.demo strong{
+    color:#5121AD;
 }
 
-.spinner{
-    width:70px;
-    height:70px;
+@media(max-width:480px){
 
-    border-radius:50%;
-
-    border:6px solid #E8DEFF;
-    border-top:6px solid #7C5CFF;
-
-    animation:spin .9s linear infinite;
+.roles{
+    grid-template-columns:1fr;
 }
 
-.loading h2{
-    margin-top:25px;
-    color:#592BC0;
-    font-family:"Playfair Display",serif;
-    font-size:28px;
+.login-card{
+    padding:30px 22px;
 }
 
-.loading p{
-    margin-top:8px;
-    color:#74698E;
+.brand h1{
+    font-size:30px;
 }
 
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-/* Back */
-
-.back{
-    display:inline-block;
-    margin-top:28px;
-    text-decoration:none;
-    color:#7658C5;
-    font-weight:700;
-    font-size:13px;
 }
 </style>
 </head>
 <body>
-
-<div class="blob one"></div>
-<div class="blob two"></div>
-<div class="blob three"></div>
 
 <div class="login-card">
 
@@ -332,97 +222,99 @@ label{
 
     <div class="brand">
         <h1>ARKOBOMBS</h1>
-        <p>
-            Academic Announcement & Readiness Platform
-            <br>
-            Sign in to continue to your dashboard.
-        </p>
+        <p>Academic Announcement & Readiness Platform</p>
     </div>
 
-    <button class="google-btn" onclick="googleFill()">
-        <div class="google-icon">G</div>
-        <span>Continue with Google</span>
-    </button>
-
-    <div class="divider">
-        <hr><span>OR</span><hr>
-    </div>
+    <div class="divider"></div>
 
     <label>Email Address</label>
-    <input
-        type="email"
-        id="email"
-        class="input"
-        placeholder="Enter your Google email..."
-    >
+    <input id="email" type="email" placeholder="Enter your email">
 
-    <button class="login-btn" onclick="loginPortal()">
-        Sign In →
-    </button>
+    <label>Password</label>
+    <input id="password" type="password" placeholder="Enter your password">
 
-    <div class="note">
-        Demo login for CODEFEST 2026.
-        <br>
-        Teacher and Student dashboards use different email accounts.
+    <div class="role-title">Choose your portal</div>
+
+    <div class="roles">
+
+        <div class="role active" id="studentRole">
+            <div class="icon">🎓</div>
+            <h3>Student</h3>
+            <span>Student Dashboard</span>
+        </div>
+
+        <div class="role" id="teacherRole">
+            <div class="icon">👩‍🏫</div>
+            <h3>Teacher</h3>
+            <span>Teacher Portal</span>
+        </div>
+
+    </div>
+
+    <button id="loginBtn">Sign In →</button>
+
+    <div class="demo">
+        <strong>Demo Login</strong><br><br>
+
+        🎓 Student<br>
+        student@arkobombs.edu<br>
+        Password: Student2026
+
+        <br><br>
+
+        👩‍🏫 Teacher/Admin<br>
+        teacher@arkobombs.edu<br>
+        Password: Teacher2026
     </div>
 
     <a href="index.html" class="back">← Back to Homepage</a>
 
 </div>
 
-<!-- Loading Screen -->
-
-<div class="loading" id="loading">
-
-    <div class="spinner"></div>
-
-    <h2>Signing in...</h2>
-
-    <p>Preparing your ARKOBOMBS workspace.</p>
-
-</div>
-
 <script>
-function googleFill(){
+let selectedRole = "student";
 
-    document.getElementById("email").focus();
+const studentRole = document.getElementById("studentRole");
+const teacherRole = document.getElementById("teacherRole");
 
-}
+studentRole.onclick = () => {
+    selectedRole = "student";
+    studentRole.classList.add("active");
+    teacherRole.classList.remove("active");
+};
 
-function loginPortal(){
+teacherRole.onclick = () => {
+    selectedRole = "teacher";
+    teacherRole.classList.add("active");
+    studentRole.classList.remove("active");
+};
 
-    const email=document.getElementById("email").value.trim().toLowerCase();
+document.getElementById("loginBtn").onclick = () => {
 
-    if(email===""){
-        alert("Please enter your Google email.");
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if(email === "" || password === ""){
+        alert("Please enter your email and password.");
         return;
     }
 
-    document.getElementById("loading").style.display="flex";
-
-    setTimeout(()=>{
-
-        /* ---------- Teacher Accounts ---------- */
-
-        if(
-            email.includes("teacher") ||
-            email.includes("prof") ||
-            email==="teacher@gmail.com" ||
-            email==="teacher@arkobombs.edu"
-        ){
-
-            window.location.href="Teacher%20Enhanced.html";
-            return;
-
+    if(selectedRole === "student"){
+        if(email === "student@arkobombs.edu" && password === "Student2026"){
+            window.location.href = "students.html";
+        }else{
+            alert("Invalid Student Account.");
         }
+    }
 
-        /* ---------- Student Accounts ---------- */
-
-        window.location.href="students.html";
-
-    },1800);
-
-}
+    if(selectedRole === "teacher"){
+        if(email === "teacher@arkobombs.edu" && password === "Teacher2026"){
+            window.location.href = "Teacher Enhanced.html";
+        }else{
+            alert("Invalid Teacher/Admin Account.");
+        }
+    }
+};
 </script>
 
 </body>
